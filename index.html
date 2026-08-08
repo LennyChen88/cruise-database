@@ -29,7 +29,7 @@
     background:var(--bg);color:var(--text);line-height:1.6}
   header{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:26px 30px}
   header h1{margin:0;font-size:24px;letter-spacing:.5px}
-  header p{margin:6px 0 0;opacity:.85;font-size:13px}
+  header p{margin:6px 0 0;opacity:.85;font-size:13px;display:none}
   .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
   .topbar{position:sticky;top:0;z-index:20;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.12)}
   .topbar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:10px 20px}
@@ -100,6 +100,7 @@
   .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
   .chip{display:inline-block;background:#eef0f5;color:#3b4a66;font-size:11px;padding:2px 9px;border-radius:999px;line-height:1.6}
   .hint{margin:6px 0 0;color:var(--muted);font-size:12px}
+  #shipFacHint{display:none}
   .countdown{margin-top:6px;padding:4px 8px;border-radius:8px;font-size:12.5px}
   .countdown.pending{background:#eafaf0;color:#1b8a4b;font-weight:600}
   .countdown.delivered{background:#f1f3f5;color:var(--muted)}
@@ -109,7 +110,7 @@
   .filters input{min-width:190px}
   .count{font-size:12px;color:var(--muted)}
   .exp{margin-left:auto;background:var(--teal);color:#fff;border:none;padding:7px 14px;border-radius:8px;
-    font-size:13px;cursor:pointer;font-weight:600}
+    font-size:13px;cursor:pointer;font-weight:600;display:none}
   .exp:hover{background:var(--teal-light)}
   .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600}
   .pill.lng{background:#e6f4f5;color:var(--teal)}
@@ -156,9 +157,9 @@
     box-shadow:var(--shadow);margin-bottom:16px}
   .deptT2{font-size:16px;color:var(--navy);margin:0 0 6px}
   .deptDesc{font-size:12.5px;color:var(--muted);margin-bottom:12px}
-  .deptTbl{font-size:12.5px}
-  .deptTbl td{vertical-align:top}
-  .dRole{width:15%}.dRep{width:20%}.dDuty{width:35%}.dAuth{width:30%}
+  .deptTbl{font-size:12.5px;width:100%;table-layout:fixed;word-break:break-word}
+  .deptTbl td{vertical-align:top;word-break:break-word}
+  .dRole{width:13%}.dRep{width:16%}.dQual{width:22%}.dDuty{width:29%}.dAuth{width:20%}
   .bi{display:flex;flex-direction:column;gap:2px}
   .biMain{color:var(--text);font-weight:600}
   .biSub{color:var(--muted);font-size:11.5px}
@@ -177,6 +178,14 @@
   .subRow td:first-child{box-shadow:inset 3px 0 0 var(--teal);padding-left:16px}
   .subRow .biMain{font-weight:500}
   .subRow .biSub{font-size:10.5px}
+  .subRow3 td{background:#eef6f8;font-size:11px;vertical-align:top}
+  .subRow3 td:first-child{box-shadow:inset 5px 0 0 var(--teal);padding-left:32px}
+  .subRow3 .biMain{font-weight:500}
+  .subRow3 .biSub{font-size:10px}
+  .subRow4 td{background:#e3f0f3;font-size:10.5px;vertical-align:top}
+  .subRow4 td:first-child{box-shadow:inset 7px 0 0 var(--teal);padding-left:48px}
+  .subRow4 .biMain{font-weight:500}
+  .subRow4 .biSub{font-size:9.5px}
   .deptTbl th .biMain{color:#fff}
   .deptTbl th .biSub{color:#cfe0e2;opacity:.9}
   /* port capacity ranking */
@@ -1563,7 +1572,7 @@ const regs = [
   {cat:"regulation", jur:"国际", name:"MARPOL《防止船舶污染公约》", nameEn:"MARPOL (Marine Pollution)", org:"国际海事组织 IMO", orgEn:"IMO", scope:"全球船舶", scopeEn:"Global ships", req:"附则 IV 生活污水处理、附则 V 垃圾管理、附则 VI 空气污染与能效。邮轮污水处理与垃圾分类为监管重点。", reqEn:"Annex IV sewage, Annex V garbage, Annex VI air pollution & energy efficiency; sewage/garbage are key for cruise.", url:"https://www.imo.org/en/About/Conventions/Pages/International-Convention-for-the-Prevention-of-Pollution-from-Ships-(MARPOL).aspx"},
   {cat:"regulation", jur:"国际", name:"IMO 2020 全球硫限令", nameEn:"IMO 2020 Sulfur Cap", org:"国际海事组织 IMO", orgEn:"IMO", scope:"全球船舶（MARPOL 附则 VI）", scopeEn:"Global ships (MARPOL Annex VI)", req:"船用燃油硫含量全球上限 0.50%（排放控制区 ECA 内 0.10%）；2020-03-01 起禁止携带不合规燃油（除非装洗涤塔）。", reqEn:"Fuel sulfur cap 0.50% globally (0.10% in ECAs); carriage ban of non-compliant fuel since 2020-03-01 unless scrubber fitted.", url:"https://www.imo.org/en/MediaCentre/HotTopics/Pages/Sulphur-2020.aspx"},
   {cat:"regulation", jur:"国际", name:"STCW《海员培训、发证和值班标准公约》", nameEn:"STCW (Seafarer Training)", org:"国际海事组织 IMO", orgEn:"IMO", scope:"船上船员与客运安全人员", scopeEn:"Crew & passenger-safety personnel", req:"应急与危机管理、人群行为专项培训；滚装客船船员须完成乘客/货物安全与船体完整认证培训。", reqEn:"Crisis management & crowd behaviour training; ro-ro passenger-ship crew certification.", url:"https://www.imo.org/en/About/Conventions/Pages/International-Convention-on-Standards-of-Training,-Certification-and-Watchkeeping-for-Seafarers-(STCW).aspx"},
-  {cat:"regulation", jur:"国际", name:"ISPS《国际船舶保安规则》", nameEn:"ISPS Code (Ship Security)", org:"国际海事组织 IMO", orgEn:"IMO", scope:"国际航行船舶（SOLAS 第 XI-2 章）", scopeEn:"International voyaging ships (SOLAS Ch. XI-2)", req:"公司、船舶与港口设施须建立保安体系，指定保安员，开展保安评估与演练；防范保安威胁。", reqEn:"Companies, ships & port facilities must set up a security regime, designate security officers, and run assessments & drills.", url:"https://www.imo.org/en/OurWork/Security/Pages/ISPS-Code.aspx"},
+  {cat:"regulation", jur:"国际", name:"ISPS《国际船舶保安规则》", nameEn:"ISPS Code (Ship Security)", org:"国际海事组织 IMO", orgEn:"IMO", scope:"国际航行船舶（SOLAS 第 XI-2 章）", scopeEn:"Ships on international voyages (SOLAS Ch. XI-2)", req:"公司、船舶与港口设施须建立保安体系，指定保安员，开展保安评估与演练；防范保安威胁。", reqEn:"Companies, ships & port facilities must set up a security regime, designate security officers, and run assessments & drills.", url:"https://www.imo.org/en/OurWork/Security/Pages/ISPS-Code.aspx"},
   {cat:"regulation", jur:"美国", name:"美国 VSP 船舶卫生计划", nameEn:"US VSP (Vessel Sanitation Program)", org:"美国疾控中心 CDC", orgEn:"US CDC", scope:"挂靠美国港口的邮轮", scopeEn:"Cruise ships calling US ports", req:"CDC 实施 100 分制卫生检查，≥86 分合格，覆盖食品、饮水、泳池、虫害防控等。", reqEn:"CDC 100-point sanitation inspection; pass ≥86; food, water, pools, pest control.", url:"https://www.cdc.gov/nceh/vsp/default.htm"},
   {cat:"regulation", jur:"国际", name:"港口国监督 PSC", nameEn:"Port State Control (PSC)", org:"巴黎/东京备忘录等", orgEn:"Paris / Tokyo MoU", scope:"挂靠港口的船舶", scopeEn:"Ships calling at ports", req:"由港口国对到港船舶进行安全、防污染与劳工条件检查，发现缺陷可滞留。", reqEn:"Coastal states inspect safety/pollution/labour; deficiencies can lead to detention.", url:"https://www.tokyomou.org/"},
   {cat:"regulation", jur:"行业", name:"行业净零与能效目标", nameEn:"Industry Net-Zero & Efficiency", org:"国际邮轮协会 CLIA", orgEn:"CLIA", scope:"全球邮轮业", scopeEn:"Global cruise industry", req:"CLIA 成员承诺 2050 年净零；新船须满足 IMO 能效指数(EEDI)，并推广岸电、LNG 及甲醇/氢等替代燃料。", reqEn:"CLIA members target net-zero by 2050; newbuilds meet EEDI; shore power, LNG, methanol/hydrogen promoted.", url:"https://cruising.org/"},
@@ -1588,16 +1597,16 @@ const regs = [
   {cat:"regulation", jur:"欧盟", name:"FuelEU Maritime 与 EU MRV", nameEn:"FuelEU Maritime & EU MRV", org:"欧盟委员会", orgEn:"European Commission", scope:"欧盟港口间及进出欧盟港口的船舶", scopeEn:"Ships between / to-from EU ports", req:"EU MRV(2015/757) 强制报告 CO₂；FuelEU Maritime(2025) 设温室气体强度上限并逐年加严。", reqEn:"EU MRV (2015/757) mandates CO₂ reporting; FuelEU Maritime (2025) caps GHG intensity, tightening yearly.", url:"https://climate.ec.europa.eu/eu-action/transport/maritime-transport/fueleu-maritime_en"},
   {cat:"regulation", jur:"欧盟", name:"《轮船与渡轮乘客权利条例》(EU) 1177/2010", nameEn:"EU Passenger Rights Reg. 1177/2010", org:"欧盟", orgEn:"European Union", scope:"欧盟境内航行的客船/渡轮", scopeEn:"Passenger ships/ferries within EU", req:"规定延误、取消、拒载的赔偿、照料、信息与无障碍义务，适用于国际与国内航线。", reqEn:"Sets compensation, care, info & accessibility duties for delays, cancellations, denied boarding on EU routes.", url:"https://eur-lex.europa.eu/eli/reg/2010/1177/oj"},
   {cat:"regulation", jur:"欧盟", name:"欧盟《船舶回收条例》(EU) 1257/2013", nameEn:"EU Ship Recycling Regulation 1257/2013", org:"欧盟", orgEn:"European Union", scope:"欧盟旗及停靠欧盟港口的船舶", scopeEn:"EU-flag & ships calling EU ports", req:"要求新船具备《有害材料清单》并使用欧盟认可拆船厂，推动绿色拆解。", reqEn:"Requires new ships to have an Inventory of Hazardous Materials & use EU-approved yards; green recycling.", url:"https://eur-lex.europa.eu/eli/reg/2013/1257/oj"},
-  {cat:"regulation", jur:"国际", name:"《2006 海事劳工公约》(MLC 2006)", nameEn:"Maritime Labour Convention (MLC 2006)", org:"国际劳工组织 ILO", orgEn:"ILO", scope:"国际航行船舶船员", scopeEn:"Seafarers on international voyages", req:"确立船员最低年龄、健康、培训、起居舱室、餐饮与遣返等权利，邮轮需持《海事劳工证书》。", reqEn:"Sets seamens' min age, health, training, accommodation, food & repatriation rights; cruise ships need MLC cert.", url:"https://www.ilo.org/dyn/normlex/en/f?p=NORMLEXPUB:12100:0::NO::P12100_ILO_CODE:C186"},
-  {cat:"regulation", jur:"国际", name:"《国际船舶压载水管理公约》(BWM 2004)", nameEn:"BWM Convention (2004)", org:"国际海事组织 IMO", orgEn:"IMO", scope:"国际航行船舶", scopeEn:"International voyaging ships", req:"要求安装压载水管理系统(BWMS)并按 D-2 标准处理，防止外来生物入侵。", reqEn:"Requires ballast water management systems (BWMS) meeting D-2 standard to prevent invasive species.", url:"https://www.imo.org/en/About/Conventions/Pages/International-Convention-for-the-Control-and-Management-of-Ships-Ballast-Water-and-Sediments,-2004.aspx"},
+  {cat:"regulation", jur:"国际", name:"《2006 海事劳工公约》(MLC 2006)", nameEn:"Maritime Labour Convention (MLC 2006)", org:"国际劳工组织 ILO", orgEn:"ILO", scope:"国际航行船舶船员", scopeEn:"Seafarers on international voyages", req:"确立船员最低年龄、健康、培训、起居舱室、餐饮与遣返等权利，邮轮需持《海事劳工证书》。", reqEn:"Sets seafarers' min age, health, training, accommodation, food & repatriation rights; cruise ships need MLC cert.", url:"https://www.ilo.org/dyn/normlex/en/f?p=NORMLEXPUB:12100:0::NO::P12100_ILO_CODE:C186"},
+  {cat:"regulation", jur:"国际", name:"《国际船舶压载水管理公约》(BWM 2004)", nameEn:"BWM Convention (2004)", org:"国际海事组织 IMO", orgEn:"IMO", scope:"国际航行船舶", scopeEn:"Ships on international voyages", req:"要求安装压载水管理系统(BWMS)并按 D-2 标准处理，防止外来生物入侵。", reqEn:"Requires ballast water management systems (BWMS) meeting D-2 standard to prevent invasive species.", url:"https://www.imo.org/en/About/Conventions/Pages/International-Convention-for-the-Control-and-Management-of-Ships-Ballast-Water-and-Sediments,-2004.aspx"},
   {cat:"regulation", jur:"国际", name:"《国际极地水域船舶规则》(Polar Code)", nameEn:"IMO Polar Code", org:"国际海事组织 IMO", orgEn:"IMO", scope:"两极水域航行船舶（含探险邮轮）", scopeEn:"Ships in polar waters (incl. expedition)", req:"对极地航行船舶的构造、设备、航行计划与船员培训提出额外安全与环保要求。", reqEn:"Extra safety/environmental requirements for construction, equipment, voyage planning & training in polar waters.", url:"https://www.imo.org/en/MediaCentre/HotTopics/Pages/Polar-code.aspx"},
   {cat:"standard", jur:"行业", name:"船级社入级规范（DNV / BV / LR / ABS）", nameEn:"Class Society Rules (DNV/BV/LR/ABS)", org:"各大船级社", orgEn:"Class Societies", scope:"入级邮轮", scopeEn:"Classed cruise ships", req:"DNV《客船与邮轮规则》、BV《客船规则》等规定船体、机电、消防与舒适性入级要求。", reqEn:"DNV Rules for Passenger Ships & Cruise Ships, BV Passenger Ship Rules, etc. set class requirements.", url:"https://www.dnv.com/maritime/rules-standards/"},
   {cat:"standard", jur:"行业", name:"ISO 管理体系标准（22000/14001/45001）", nameEn:"ISO Management Standards (22000/14001/45001)", org:"国际标准化组织 ISO", orgEn:"ISO", scope:"邮轮运营（自愿采用）", scopeEn:"Cruise operations (voluntary)", req:"邮轮公司普遍采用 ISO 22000(食品安全)、ISO 14001(环境)、ISO 45001(职业健康安全) 建立管理体系。", reqEn:"Cruise lines widely adopt ISO 22000 (food safety), 14001 (environment), 45001 (OH&S) management systems.", url:"https://www.iso.org/"}
 ];
 const trends = [
   {title:"LNG 与替代燃料新船潮", titleEn:"LNG & Alternative-Fuel Newbuilds",
-   desc:"在 CLIA 成员国 2026–2037 年合计约 60 艘、投资逾 710 亿美元的新船订单中，清洁与替代燃料推进已成为主流。大型远洋邮轮订单中约半数（按艘数约 49%、按吨位约 64%）采用 LNG 双燃料；现役船队中约三分之一已可使用 LNG。LNG 相较重油可减排二氧化碳约 25%、硫氧化物近 99%、氮氧化物约 85%。与此同时，甲醇就绪船开始交付（如迪士尼 Adventure），维京 Libra 将成为全球首艘氢动力混合推进邮轮（2026 年四季度交付）。在 IMO 净零框架与区域法规仍存不确定性的背景下，船东更倾向「燃料可选择性」策略——以 LNG 为主、预留甲醇/氢改装空间，并配套岸电与生物甲烷加注，分阶段迈向 CLIA 2050 年净零承诺。",
-   descEn:"Within CLIA members' 2026–2037 orderbook of ~60 newbuilds worth over $71 billion, clean and alternative propulsion is mainstream: roughly half of large oceangoing orders (~49% by vessel count, ~64% by tonnage) are LNG dual-fuel, and about a third of the active fleet can already use LNG. Versus heavy fuel oil, LNG cuts CO2 ~25%, SOx ~99% and NOx ~85%. Methanol-ready ships are now delivering (e.g. Disney Adventure), and Viking Libra is set to be the world's first hydrogen-hybrid cruise ship (Q4 2026). Amid uncertainty over the IMO net-zero framework, owners favour a fuel-optionality strategy—LNG first, with methanol/hydrogen retrofit readiness plus shore power and biomethane bunkering—to advance CLIA's 2050 net-zero goal in stages."},
+   desc:"在 CLIA 成员国 2026–2037 年合计约 60 艘、投资逾 710 亿美元的新船订单中，清洁与替代燃料推进已成为主流。大型远洋邮轮订单中约半数（按艘数约 49%、按吨位约 64%）采用 LNG 双燃料；现役船队中约三分之一已可使用 LNG。LNG 相较重油可减排二氧化碳约 25%、硫氧化物近 99%、氮氧化物约 85%。与此同时，甲醇就绪船（具备绿色甲醇使用能力）开始交付（如迪士尼 Adventure），维京 Libra 将成为全球首艘氢动力混合推进邮轮（2026 年四季度交付）。在 IMO 净零框架与区域法规仍存不确定性的背景下，船东更倾向「燃料可选择性」策略——以 LNG 为主、预留甲醇/氢改装空间，并配套岸电与生物甲烷加注，分阶段迈向 CLIA 2050 年净零承诺。",
+   descEn:"Within CLIA members' 2026–2037 orderbook of ~60 newbuilds worth over $71 billion, clean and alternative propulsion is mainstream: roughly half of large oceangoing orders (~49% by vessel count, ~64% by tonnage) are LNG dual-fuel, and about a third of the active fleet can already use LNG. Versus heavy fuel oil, LNG cuts CO2 ~25%, SOx ~99% and NOx ~85%. Methanol-ready ships (capable of using green methanol) are now delivering (e.g. Disney Adventure), and Viking Libra is set to be the world's first hydrogen-hybrid cruise ship (Q4 2026). Amid uncertainty over the IMO net-zero framework, owners favour a fuel-optionality strategy—LNG first, with methanol/hydrogen retrofit readiness plus shore power and biomethane bunkering—to advance CLIA's 2050 net-zero goal in stages."},
   {title:"巨轮持续突破 25 万吨", titleEn:"Megaships Beyond 250k GT",
    desc:"皇家加勒比 Icon 级（Icon of the Seas、Star of the Seas 及 2026 年交付的 Legend of the Seas）以约 250,800 总吨、可载约 7,600 名旅客，重新定义单体邮轮的体量上限，并首次在单船集成八大主题社区与多层水上乐园。订单簿显示，2030 年代新船总吨有望突破 30 万吨，舱房与公共空间继续向高层化、分区化演进。超大型船通过规模效应摊薄单位排放与运营成本，但也对母港泊位长度、岸电容量与登离船组织提出更高要求，倒逼港口基础设施同步升级。这一趋势背后是单船载客量与船上消费场景的同步放大——更多餐厅、水上乐园与高端舱房带来更高的单位收益；但同时也推高单船造价（普遍逾 20 亿美元）及保险、船员配置成本，使船东更依赖高利用率、长航季的精细化运营来摊薄投入。",
    descEn:"Royal Caribbean's Icon class—Icon of the Seas, Star of the Seas and the 2026-delivered Legend of the Seas—redefines the single-vessel ceiling at ~250,800 GT and ~7,600 guests, integrating eight themed neighbourhoods and a multi-deck water park. The orderbook suggests 2030s newbuilds could exceed 300,000 GT, with staterooms and public spaces growing taller and more zoned. Megaships spread emissions and operating costs per berth through scale, but also raise the bar for home-port berth length, shore-power capacity and embarkation logistics—forcing port infrastructure to upgrade in step."},
@@ -1628,25 +1637,25 @@ const DEPTS = [
        duty:"全船最高指挥；对船舶安全、人命安全与防污染负总责；保安与弃船总指挥；签署航海日志。",
        dutyEn:"Supreme command onboard; ultimate responsibility for safety of life, ship security and pollution prevention; CSO/abandon-ship commander; signs the deck log.",
        auth:"船上最高决定权，可否决任何威胁安全的指令；对船员有纪律处分权；紧急时可征用一切资源。",
-       authEn:"Highest authority onboard—may override any order that threatens safety; disciplinary power over crew; may commandeer all resources in an emergency."},
+       authEn:"Highest authority onboard—may override any order that threatens safety; disciplinary power over crew; may commandeer all resources in an emergency.", qual:"持有船长适任证书（Master Mariner，无限航区）、有效海员证与健康证、STCW 基本安全培训；具备 5 年以上大副资历及大型邮轮指挥经验。", qualEn:"Holds an unlimited Master Mariner Certificate of Competency, valid seaman's book and medical certificate, and STCW basic safety training; 5+ years as Chief Officer with large-ship command experience."},
       {role:"副船长 / 大副", roleEn:"Staff Captain / Chief Officer",
        rep:"船长", repEn:"Captain",
        duty:"协助船长管理全船；靠离泊与甲板/酒店日常运行指挥；船员管理与排班；船长缺席时代行指挥。",
        dutyEn:"Assists the Captain in managing the ship; commands berthing and daily deck/hotel operations; crew management and scheduling; acts in the Captain's absence.",
        auth:"船长缺席时代行全船指挥权；可批准甲板部门排班与物料申领。",
-       authEn:"Exercises command in the Captain's absence; approves deck-department schedules and stores requisitions."},
+       authEn:"Exercises command in the Captain's absence; approves deck-department schedules and stores requisitions.", qual:"持有大副适任证书（Chief Mate，无限航区）、STCW 与 GMDSS 证书；3 年以上驾驶员资历，熟悉船舶操纵、货运与应急指挥。", qualEn:"Holds an unlimited Chief Mate Certificate of Competency plus STCW and GMDSS certificates; 3+ years as watch officer, proficient in ship handling, cargo and emergency command."},
       {role:"驾驶员（二/三副）", roleEn:"Officer of the Watch (2/O, 3/O)",
        rep:"大副 / 船长", repEn:"Chief Officer / Captain",
        duty:"航行值班、海图与导航设备（GPS/雷达/AIS）操作、避碰与航行计划编制。",
        dutyEn:"Watchkeeping; charts and navigation aids (GPS/radar/AIS); collision avoidance and voyage planning.",
        auth:"值班期间对航行安全有现场指挥权，可指令减速或改向避让。",
-       authEn:"On-watch command of navigational safety; may order speed reduction or course change to avoid collision."},
+       authEn:"On-watch command of navigational safety; may order speed reduction or course change to avoid collision.", qual:"持有二副或三副适任证书、GMDSS 通用操作员证书、STCW 培训；航海院校专科以上学历。", qualEn:"Holds a 2/O or 3/O Certificate of Competency, GMDSS General Operator Certificate and STCW training; diploma or degree from a maritime academy."},
       {role:"水手长", roleEn:"Boatswain (Bosun)",
        rep:"大副", repEn:"Chief Officer",
        duty:"甲板保养、锚泊与系泊作业、救生艇/消防设备维护，带领甲板水手。",
        dutyEn:"Deck maintenance, anchoring/mooring, lifeboat and fire-fighting equipment upkeep; leads deck ratings.",
        auth:"指挥甲板水手班；可叫停危险的甲板作业。",
-       authEn:"Directs the deck ratings; may stop unsafe deck work."}
+       authEn:"Directs the deck ratings; may stop unsafe deck work.", qual:"持有效海员证与基本安全培训；具备甲板维护保养、系泊作业与救生艇操作经验，通常需 3 年以上水手资历。", qualEn:"Valid seaman's book and basic safety training; deck maintenance, mooring and lifeboat-handling experience, typically 3+ years as a rating."}
     ]
   },
   {
@@ -1660,19 +1669,19 @@ const DEPTS = [
        duty:"全船机电动力与防污染设备运行维护总负责；能效与备件管理；值班安排。",
        dutyEn:"Overall responsibility for machinery, propulsion and pollution-control upkeep; energy efficiency, spares and watch schedules.",
        auth:"机电设备启停与应急抢修指挥；对影响航行/安全的设备缺陷有停航建议权。",
-       authEn:"Commands machinery start/stop and emergency repairs; may recommend suspension of sailing over unsafe defects."},
+       authEn:"Commands machinery start/stop and emergency repairs; may recommend suspension of sailing over unsafe defects.", qual:"持有轮机长适任证书（Chief Engineer，无限航区）、STCW 证书；8 年以上轮机资历，熟悉主辅机与防污染设备。", qualEn:"Holds an unlimited Chief Engineer Certificate of Competency and STCW certificates; 8+ years marine engineering experience, expert in main/auxiliary machinery and pollution prevention."},
       {role:"大管轮 / 二管轮", roleEn:"Second Engineer",
        rep:"轮机长", repEn:"Chief Engineer",
        duty:"主机、辅机值班与维护；备件与润滑油管理。",
        dutyEn:"Watches and maintenance of main/auxiliary engines; spares and lube-oil control.",
        auth:"在其分管设备范围内有操作与隔离权。",
-       authEn:"May operate and isolate equipment under his/her charge."},
+       authEn:"May operate and isolate equipment under his/her charge.", qual:"持有大管轮适任证书、STCW 证书；5 年以上轮机员资历，熟悉机舱管理与维修。", qualEn:"Holds a Second Engineer Certificate of Competency and STCW certificates; 5+ years as engine officer, experienced in engine-room management and maintenance."},
       {role:"电机员", roleEn:"Electro-Technical Officer (ETO)",
        rep:"轮机长", repEn:"Chief Engineer",
        duty:"电气、自动化、导航与通信设备的维护与故障排除。",
        dutyEn:"Maintains electrical, automation, navigation and communication equipment.",
        auth:"可切断或隔离相关电气回路以抢修。",
-       authEn:"May isolate electrical circuits for repair."}
+       authEn:"May isolate electrical circuits for repair.", qual:"持有电子电气员（ETO）适任证书或电工类资质、STCW 证书；熟悉船舶配电、自动化与控制系统。", qualEn:"Holds an Electro-Technical Officer Certificate of Competency or electrical trade qualification with STCW certificates; skilled in ship power distribution, automation and control systems."}
     ]
   },
   {
@@ -1686,13 +1695,13 @@ const DEPTS = [
        duty:"客房、餐饮、娱乐、前台、商店及船员食宿总协调；宾客满意度管理。",
        dutyEn:"Overall coordination of staterooms, F&B, entertainment, front office, shops and crew welfare; guest-satisfaction management.",
        auth:"宾客服务资源调配权；可处理重大投诉与客舱升级；跨部门协调权。",
-       authEn:"Allocates guest-service resources; resolves major complaints and upgrades cabins; cross-department coordination."},
+       authEn:"Allocates guest-service resources; resolves major complaints and upgrades cabins; cross-department coordination.", qual:"酒店管理相关专业背景；8 年以上邮轮或高端酒店管理经验，熟悉宾客服务与多部门运营统筹。", qualEn:"Hospitality-management background; 8+ years cruise or luxury-hotel management, experienced in guest services and multi-department operations."},
       {role:"前厅 / 宾客服务经理", roleEn:"Front Office / Guest Services Manager",
        rep:"酒店总监", repEn:"Hotel Director",
        duty:"登离船组织、舱房分配、问询、投诉受理与船上消费账户结算。",
        dutyEn:"Embarkation/disembarkation, cabin allocation, inquiries, complaints and onboard account settlement.",
        auth:"可调整舱房分配与账户差错处理。",
-       authEn:"May reallocate cabins and correct account errors."}
+       authEn:"May reallocate cabins and correct account errors.", qual:"酒店或旅游管理专业；3 年以上前台与宾客关系管理经验，良好的中英文沟通与 PMS 系统操作能力。", qualEn:"Hotel or tourism-management background; 3+ years front-desk and guest-relations experience with strong bilingual communication and PMS skills."}
     ]
   },
   {
@@ -1705,13 +1714,13 @@ const DEPTS = [
        duty:"餐厅与酒吧运营、酒水供应链、成本与库存控制、食品安全监督。",
        dutyEn:"Restaurant/bar operations, beverage supply, cost and inventory control, food-safety oversight.",
        auth:"可停供不安全食品；供应商验收权。",
-       authEn:"May suspend unsafe food; accepts/rejects suppliers."},
+       authEn:"May suspend unsafe food; accepts/rejects suppliers.", qual:"餐饮管理专业或同等资历；5 年以上邮轮或酒店餐饮运营经验，熟悉食品安全（HACCP）与成本控制。", qualEn:"F&B-management qualification or equivalent; 5+ years cruise or hotel food-service operations, knowledgeable in HACCP food safety and cost control."},
       {role:"行政总厨", roleEn:"Executive Chef",
        rep:"酒店总监 / 餐饮经理", repEn:"Hotel Director / F&B Manager",
        duty:"菜单设计与厨房运营；HACCP 食品安全体系执行；团队管理。",
        dutyEn:"Menu design and galley operations; HACCP food-safety compliance; team management.",
        auth:"对不符合食品安全标准的原料有拒用权；厨房人员调度权。",
-       authEn:"May reject ingredients failing food-safety standards; schedules galley staff."}
+       authEn:"May reject ingredients failing food-safety standards; schedules galley staff.", qual:"烹饪专业资质；8 年以上厨房管理经验，持有食品安全管理证书，熟悉大规模供餐与菜单设计。", qualEn:"Culinary qualification; 8+ years kitchen management with a food-safety manager certificate, expert in high-volume production and menu design."}
     ]
   },
   {
@@ -1724,13 +1733,13 @@ const DEPTS = [
        duty:"舱房与公共区域清洁、布草管理、虫害防控与卫生检查配合。",
        dutyEn:"Stateroom and public-area cleaning, linen control, pest control and hygiene inspections.",
        auth:"可要求宾客配合卫生检查；可暂停使用不达标的舱房。",
-       authEn:"May require guest cooperation in inspections; can take non-compliant cabins out of service."},
+       authEn:"May require guest cooperation in inspections; can take non-compliant cabins out of service.", qual:"房务管理经验 5 年以上；熟悉客舱清洁标准、布草管理与洗涤流程，具备团队统筹能力。", qualEn:"5+ years housekeeping management; skilled in cabin cleaning standards, linen control and laundry flow, with team-leadership ability."},
       {role:"客舱服务员", roleEn:"Cabin Steward",
        rep:"房务总监", repEn:"Executive Housekeeper",
        duty:"舱房清洁与补给、宾客迎送与日常需求响应。",
        dutyEn:"Cabin cleaning and provisioning; guest welcome and daily needs.",
        auth:"在其负责舱房范围内执行清洁与补给。",
-       authEn:"Performs cleaning/provisioning within assigned cabins."}
+       authEn:"Performs cleaning/provisioning within assigned cabins.", qual:"基础学历，经酒店客房服务培训；具备体力劳动能力、服务意识与基本英语沟通能力。", qualEn:"Basic education plus cabin-service training; physical stamina, service mindset and basic English communication."}
     ]
   },
   {
@@ -1743,13 +1752,13 @@ const DEPTS = [
        duty:"全船娱乐节目、主题活动、主持团队与岸上观光协调。",
        dutyEn:"Oversees shows, themed events, hosting team and shore-excursion coordination.",
        auth:"对演出与活动安全有现场裁决权；可调整活动安排。",
-       authEn:"On-site authority over show/event safety; may adjust programming."},
+       authEn:"On-site authority over show/event safety; may adjust programming.", qual:"演艺、活动策划或酒店管理背景；5 年以上邮轮娱乐主持与团队管理经验，流利中英（及多语）表达。", qualEn:"Entertainment, event-planning or hospitality background; 5+ years cruise entertainment hosting and team management, fluent bilingual and often multilingual presentation."},
       {role:"青年辅导员", roleEn:"Youth Counselor",
        rep:"邮轮总监", repEn:"Cruise Director",
        duty:"儿童与青少年俱乐部活动组织与安全看护。",
        dutyEn:"Runs kids'/teens' club activities and supervises their safety.",
        auth:"可在其管辖区域内管理儿童活动与纪律。",
-       authEn:"Manages children's activities and discipline within assigned areas."}
+       authEn:"Manages children's activities and discipline within assigned areas.", qual:"持有幼儿或儿童教育相关资质、急救（CPR / First Aid）证书；有儿童活动带领经验。", qualEn:"Early-childhood or education qualification with CPR / First-Aid certificate; experience leading childrens activities."}
     ]
   },
   {
@@ -1757,18 +1766,18 @@ const DEPTS = [
     desc:"执行 ISPS 船舶保安计划，负责门禁、监控、安检与事件处置，是船舶保安的核心。",
     descEn:"Implements the ISPS ship-security plan—access control, surveillance, screening and incident response; the core of ship security.",
     roles:[
-      {role:"保安主管 / 船舶保安员(SSO)", roleEn:"Security Officer / Ship Security Officer (SSO)",
+      {role:"保安主管 / 船舶保安员（SSO）", roleEn:"Security Officer / Ship Security Officer (SSO)",
        rep:"船长（ISPS 指定）", repEn:"Captain (ISPS-designated)",
        duty:"执行船舶保安计划、门禁、监控、安检与事件调查；担任船舶保安员。",
        dutyEn:"Executes the ship-security plan—access control, CCTV, screening, investigations; serves as SSO.",
        auth:"可拒绝登/离船、拘留可疑人员并报警；紧急时可封锁区域；对保安威胁有即时处置权。",
-       authEn:"May deny boarding/landing, detain suspects and call police; can seal areas in emergencies; immediate response to security threats."},
+       authEn:"May deny boarding/landing, detain suspects and call police; can seal areas in emergencies; immediate response to security threats.", qual:"持有经认可的船舶保安员（SSO）培训证书、STCW 保安意识培训；具备安保或军警背景者优先。", qualEn:"Recognized Ship Security Officer (SSO) training and STCW security-awareness; security, military or police background preferred."},
       {role:"保安员", roleEn:"Security Guard",
        rep:"保安主管", repEn:"Security Officer",
        duty:"巡逻、门禁值守、监控与人群管理。",
        dutyEn:"Patrols, gate duty, CCTV and crowd management.",
        auth:"可执行门禁与安检规定。",
-       authEn:"Enforces access and screening rules."}
+       authEn:"Enforces access and screening rules.", qual:"完成邮轮保安意识与指定安保职责培训；身体健康，有安保或服务经验者优先。", qualEn:"Completed ship security-awareness and designated-security-duties training; good fitness, security or service experience preferred."}
     ]
   },
   {
@@ -1781,13 +1790,13 @@ const DEPTS = [
        duty:"诊疗、急救、公共卫生监测与隔离、药品管理。",
        dutyEn:"Diagnosis, emergency care, public-health surveillance and isolation, pharmacy control.",
        auth:"基于医学判断可要求隔离病患、限制活动；医疗决定不受经营压力干扰。",
-       authEn:"May quarantine patients and restrict movement on medical grounds; decisions are free from commercial pressure."},
+       authEn:"May quarantine patients and restrict movement on medical grounds; decisions are free from commercial pressure.", qual:"持有有效医师执业资格、航海医疗或远程医疗认证；具备内科与急诊经验，能独立处置船上常见病症。", qualEn:"Valid medical license with maritime or telemedicine certification; internal and emergency medicine experience, able to manage common onboard conditions independently."},
       {role:"护士", roleEn:"Nurse",
        rep:"船医", repEn:"Ship's Doctor",
        duty:"护理、接种、病历与药房协助。",
        dutyEn:"Nursing, vaccination, records and pharmacy assistance.",
        auth:"在船医授权下执行护理与给药。",
-       authEn:"Administers care and medication under the doctor's authority."}
+       authEn:"Administers care and medication under the doctor's authority.", qual:"持有注册护士资质与急救证书；有急诊或航海医疗经验者优先。", qualEn:"Registered-nurse license and first-aid certificate; emergency or maritime-medicine experience preferred."}
     ]
   },
   {
@@ -1800,7 +1809,7 @@ const DEPTS = [
        duty:"岸上行程设计、供应商资质审核、下船组织与安全管理。",
        dutyEn:"Tour design, supplier vetting, landing organisation and safety management.",
        auth:"可取消不合规供应商行程；下船批次调度权。",
-       authEn:"May cancel non-compliant supplier tours; schedules landing batches."}
+       authEn:"May cancel non-compliant supplier tours; schedules landing batches.", qual:"旅游管理或相关专业；3 年以上岸上游与目的地运营经验，熟悉行程设计与供应商管理。", qualEn:"Tourism-management background; 3+ years shore-excursion and destination operations, experienced in itinerary design and vendor management."}
     ]
   },
   {
@@ -1813,7 +1822,7 @@ const DEPTS = [
        duty:"船员招聘、合同、工资、培训、福利、遣返与纪律。",
        dutyEn:"Crew recruitment, contracts, payroll, training, welfare, repatriation and discipline.",
        auth:"可建议解雇/调岗；考勤与奖惩建议权。",
-       authEn:"May recommend dismissal/transfer; proposes attendance and disciplinary actions."}
+       authEn:"May recommend dismissal/transfer; proposes attendance and disciplinary actions.", qual:"人力资源或海事管理背景；3 年以上船员人事、薪酬与合规管理经验。", qualEn:"HR or maritime-management background; 3+ years crew personnel, payroll and compliance management."}
     ]
   },
   {
@@ -1826,7 +1835,7 @@ const DEPTS = [
        duty:"现金、外汇、船上消费账户、报表与审计配合。",
        dutyEn:"Cash, FX, onboard accounts, reporting and audit support.",
        auth:"资金收付与账户调整权；可冻结异常交易。",
-       authEn:"Authorised for receipts/payments and account adjustments; may freeze suspicious transactions."}
+       authEn:"Authorised for receipts/payments and account adjustments; may freeze suspicious transactions.", qual:"财务或会计专业；5 年以上邮轮财务、收银与合规管理经验，熟悉国际结算。", qualEn:"Finance or accounting background; 5+ years cruise finance, cashiering and compliance, familiar with international settlement."}
     ]
   },
   {
@@ -1839,7 +1848,7 @@ const DEPTS = [
        duty:"垃圾、污水、油类与大气排放合规管理（MARPOL）；记录、自检与外部检查配合。",
        dutyEn:"Compliance of garbage, sewage, oil and air emissions (MARPOL); records, self-checks and external inspections.",
        auth:"可责令停止违规排放；对环保违规有上报权。",
-       authEn:"May stop non-compliant discharges; right to report environmental violations."}
+       authEn:"May stop non-compliant discharges; right to report environmental violations.", qual:"环境工程或海事相关专业；持有船舶防污染（MARPOL）培训证书，熟悉垃圾、污水与油类管理。", qualEn:"Environmental-engineering or maritime background; MARPOL pollution-prevention training, expert in garbage, sewage and oil management."}
     ]
   }
 ];
@@ -1875,12 +1884,124 @@ const DEPT_SUBS = {
   '房务总监 / 客舱经理':[{p:'楼层主管',pe:'Floor Supervisor'},{p:'布草员',pe:'Linen Keeper'},{p:'公共区域保洁',pe:'Public Area Attendant'}],
   '邮轮总监 / 娱乐总监':[{p:'活动经理',pe:'Activity Manager'},{p:'主持/邮轮大使',pe:'Cruise Staff / Host'},{p:'赌场经理',pe:'Casino Manager'}],
   '青年辅导员':[{p:'儿童俱乐部助理',pe:'Kids Club Assistant'}],
-  '保安主管 / 船舶保安员(SSO)':[{p:'监控员',pe:'CCTV Operator'},{p:'安检员',pe:'Screening Officer'}],
+  '保安主管 / 船舶保安员（SSO）':[{p:'监控员',pe:'CCTV Operator'},{p:'安检员',pe:'Screening Officer'}],
   '船医':[{p:'医务助理',pe:'Medical Assistant'}],
   '岸上游览经理':[{p:'观光向导',pe:'Shore Excursion Guide'},{p:'预订协调',pe:'Excursion Coordinator'}],
   '船员事务长 / 人事经理':[{p:'船员管理员',pe:'Crew Administrator'}],
   '事务长 / 财务主管':[{p:'会计',pe:'Accountant'},{p:'出纳',pe:'Cashier'}],
   '环保官':[{p:'环保监督员',pe:'Environmental Watchman'}]
+};
+
+/* 三级岗位（按二级岗位中文名索引；每项含中英文名称、隶属、职责、权限，与一/二级岗位同表呈现，缩进更深） */
+const DEPT_SUBS3 = {
+  '舵工':[{p:'舵工助理',pe:'Helmsman Assistant',rep:'舵工 / 当班驾驶员',repEn:'Quartermaster / Officer of the Watch',
+    duty:'在舵工指导下练习操舵、熟记舵令与舵效，协助瞭望与驾驶台清洁。',
+    dutyEn:'Practises steering under the quartermaster, memorises helm orders and responses, and assists lookout and bridge cleaning.',
+    auth:'在监督下操舵，无独立指挥权。',authEn:'Steers under supervision and holds no independent command.', qual:'基本安全培训；在舵工指导下学习操舵与甲板协助。', qualEn:'Basic safety training; learns steering and deck assistance under the Quartermaster.'}],
+  '四管轮':[{p:'机工',pe:'Motorman',rep:'四管轮 / 轮机员',repEn:'4th Engineer / Engine Rating',
+    duty:'协助发电机、辅机与管系的巡检、加油与日常保养，记录运行参数。',
+    dutyEn:'Assists inspection, lubrication and upkeep of generators, auxiliaries and piping, and logs parameters.',
+    auth:'在指导下操作辅机，无独立隔离带电设备权。',authEn:'Operates auxiliaries under guidance and may not isolate live equipment independently.', qual:'持基本安全培训；协助机舱设备值班与日常维护。', qualEn:'Basic safety training; assists engine-room watch and routine maintenance.'}],
+  '宾客关系经理':[{p:'礼宾员',pe:'Concierge',rep:'宾客关系经理',repEn:'Guest Relations Manager',
+    duty:'提供目的地信息、预订与票务、行李与特殊需求协调，并维护宾客档案。',
+    dutyEn:'Provides destination info, bookings and ticketing, luggage and special-need coordination, and maintains guest profiles.',
+    auth:'在授权内安排礼宾服务，可上报特殊诉求。',authEn:'Arranges concierge services within authority and escalates special requests.', qual:'酒店前台或礼宾经验；良好的中英文沟通与本地资讯能力。', qualEn:'Concierge or front-office experience; strong bilingual communication and local knowledge.'}],
+  '餐厅主管':[{p:'餐厅领班',pe:"Head Waiter / Maître d'",rep:'餐厅主管 / 餐饮经理',repEn:'Restaurant Manager / F&B Manager',
+    duty:'负责迎宾、引座、席面摆台与用餐节奏把控，并协助客诉处理。',
+    dutyEn:'Handles greeting, seating, table setting and dining pace, and assists complaint handling.',
+    auth:'可调度本区服务员与调整桌位，在授权内处理用餐问题。',authEn:'Assigns section servers and seating and handles dining issues within authority.', qual:'餐饮服务经验 2 年以上；熟悉点单、出品与客诉处理。', qualEn:'2+ years food service; skilled in order taking, service and complaint handling.'}],
+  '酒吧经理':[{p:'调酒师',pe:'Bartender',rep:'酒吧经理',repEn:'Bar Manager',
+    duty:'调制鸡尾酒与饮品、维护吧台卫生与库存、与宾客互动。',
+    dutyEn:'Mixes cocktails and drinks, maintains bar hygiene and stock, and engages guests.',
+    auth:'在授权内供应酒水，对酗酒宾客有拒供权。',authEn:'Serves drinks within authority and may refuse service to intoxicated guests.', qual:'持有调酒资质或经验；熟悉酒单、吧台卫生与年龄核验。', qualEn:'Bartending qualification or experience; skilled in menus, bar hygiene and age verification.'}],
+  '公共区域保洁':[{p:'保洁员',pe:'General Cleaner',rep:'公共区域保洁 / 楼层主管',repEn:'Public Area Attendant / Floor Supervisor',
+    duty:'负责走廊、大堂、餐厅等公共区域日常清洁、垃圾收集与用具整理。',
+    dutyEn:'Cleans corridors, lobbies and restaurants daily, collects waste and tidies supplies.',
+    auth:'在指派区域执行清洁，可上报设施损坏。',authEn:'Cleans assigned areas and reports facility damage.', qual:'经清洁培训；负责指定区域卫生维护。', qualEn:'Cleaning training; maintains assigned areas.'}],
+  '赌场经理':[{p:'荷官',pe:'Dealer',rep:'赌场经理',repEn:'Casino Manager',
+    duty:'发牌、维持牌桌秩序、核验年龄与反洗钱合规，并记录账表。',
+    dutyEn:'Deals games, keeps table order, verifies age and anti-ML compliance, and logs tables.',
+    auth:'可叫停违规赌局，在授权内处理账差。',authEn:'May halt non-compliant games and handles till variances within authority.', qual:'持有发牌资质与合规培训；熟悉博彩规则与账物。', qualEn:'Dealer qualification and compliance training; knows gaming rules and cage control.'}],
+  '活动经理':[{p:'活动助理',pe:'Activity Host',rep:'活动经理 / 邮轮总监',repEn:'Activity Manager / Cruise Director',
+    duty:'协助日间活动组织、器材准备与宾客引导，并主持小型互动。',
+    dutyEn:'Assists daytime activities, prepares equipment and guides guests, and hosts small interactions.',
+    auth:'在其协助活动范围内维持秩序，可调度活动器材。',authEn:'Maintains order within assisted events and may deploy activity equipment.', qual:'有活动协助或演艺经验；良好的互动与服务意识。', qualEn:'Activity or entertainment experience; good interaction and service sense.'}],
+  '安检员':[{p:'安检助理',pe:'Screening Assistant',rep:'安检员 / 保安主管',repEn:'Screening Officer / Security Officer',
+    duty:'协助金属探测、X 光判读与随身物品检查，并记录异常。',
+    dutyEn:'Assists metal detection, X-ray screening and personal-item checks, and logs anomalies.',
+    auth:'在监督下执行安检规定，可上报可疑物品。',authEn:'Enforces screening under supervision and reports suspicious items.', qual:'完成安检辅助培训；协助登离船安检与引导。', qualEn:'Screening-assistant training; assists embark and disembark screening and guidance.'}],
+  '医务助理':[{p:'药剂助理',pe:'Pharmacy Assistant',rep:'医务助理 / 船医',repEn:"Medical Assistant / Ship's Doctor",
+    duty:'协助药品管理、发药登记与器械消毒，并维护医疗记录。',
+    dutyEn:'Assists pharmacy control, dispensing logs and instrument sterilisation, and maintains records.',
+    auth:'在船医授权下协助给药与登记，无独立诊断权。',authEn:'Assists medication and logging under the doctor and holds no independent diagnosis.', qual:'持有药房助理资质；协助药品管理与发放记录。', qualEn:'Pharmacy-assistant qualification; assists dispensing and records.'}],
+  '预订协调':[{p:'预订文员',pe:'Reservation Clerk',rep:'预订协调 / 岸上游览经理',repEn:'Excursion Coordinator / Shore Excursion Manager',
+    duty:'处理岸上行程预订、改签与退费，核对名单与收款。',
+    dutyEn:'Processes tour bookings, changes and refunds, and reconciles lists and payments.',
+    auth:'在系统权限内办理预订与退改，可上报异常订单。',authEn:'Books and amends within system rights and escalates abnormal orders.', qual:'熟悉预订系统与办公软件；细致、有条理。', qualEn:'Skilled in reservation systems and office tools; meticulous and organized.'}],
+  '船员管理员':[{p:'薪酬文员',pe:'Payroll Clerk',rep:'船员管理员 / 人事经理',repEn:'Crew Administrator / HR Manager',
+    duty:'核算船员工资、加班与代扣，准备发薪与报表，并维护合同档案。',
+    dutyEn:'Computes crew wages, overtime and deductions, prepares payroll and reports, and maintains contract files.',
+    auth:'在授权内处理薪酬数据，可上报核算差异。',authEn:'Handles payroll data within authority and reports computation variances.', qual:'财务或人事背景；熟悉薪酬核算与系统操作。', qualEn:'Finance or HR background; skilled in payroll and systems.'}],
+  '会计':[{p:'记账员',pe:'Bookkeeper',rep:'会计 / 事务长',repEn:'Accountant / Purser',
+    duty:'登记收支凭证、核对账目与编制辅助报表，并整理单据。',
+    dutyEn:'Posts receipts/payments, reconciles accounts and prepares supporting reports, and files vouchers.',
+    auth:'在授权内记账与核对，可上报账实差异。',authEn:'Books and reconciles within authority and reports variances.', qual:'会计基础；负责凭证录入与账目核对。', qualEn:'Basic accounting; handles voucher entry and reconciliation.'}],
+  '环保监督员':[{p:'环保巡检员',pe:'Environmental Roundsman',rep:'环保监督员 / 环保官',repEn:'Environmental Watchman / Environmental Officer',
+    duty:'按排班巡检垃圾、污水与油类作业点，记录数据并配合外部检查。',
+    dutyEn:'Inspects garbage, sewage and oil operation points on rounds, logs data and supports external checks.',
+    auth:'可叫停违规作业并上报，在授权内记录台账。',authEn:'May stop non-compliant work and report, and logs within authority.', qual:'完成环保巡检培训；按排班执行巡检与记录。', qualEn:'Environmental-rounds training; performs scheduled inspections and logging.'}],
+
+  /* —— 餐饮部：补齐其余二级岗位的三级（侍酒师 / 副厨 / 饼房厨师 / 厨师助理） —— */
+  '侍酒师':[{p:'助理侍酒师',pe:'Assistant Sommelier',rep:'侍酒师 / 行政总厨',repEn:'Sommelier / Executive Chef',
+    duty:'协助酒单管理、葡萄酒开瓶醒酒与侍酒服务，维护酒窖温湿度与库存记录。',
+    dutyEn:'Assists wine-list management, decanting and wine service, and maintains cellar climate and stock records.',
+    auth:'在授权内服务酒水与推荐配餐酒，可上报酒损。',authEn:'Serves and recommends wine pairings within authority and reports breakage.', qual:'葡萄酒基础认证；协助酒单管理与酒水服务。', qualEn:'Entry-level wine certification; assists list management and service.'}],
+  '副厨':[{p:'厨师主管',pe:'Chef de Partie / Line Cook',rep:'副厨 / 行政总厨',repEn:'Sous Chef / Executive Chef',
+    duty:'负责指定热菜/冷菜线条的烹饪出品、配方执行与出餐节奏，带教本线厨师助理。',
+    dutyEn:'Runs an assigned hot/cold section—cooking, recipe execution and pacing—and trains commis on the line.',
+    auth:'在本线范围内调度厨师助理与出餐，可叫停不符标准的出品。',authEn:'Assigns commis and plating on the line and may stop off-standard dishes.', qual:'烹饪经验 3 年以上；负责某一岗位（station）出品。', qualEn:'3+ years culinary; owns a kitchen stations production.'}],
+  '饼房厨师':[{p:'饼房助理',pe:'Pastry Commis',rep:'饼房厨师 / 副厨',repEn:'Pastry Chef / Sous Chef',
+    duty:'协助面包、甜点与装饰的制作、备料与裱花，维护饼房卫生与器具。',
+    dutyEn:'Assists bread, dessert and decoration prep, piping and keeps the pastry shop clean and equipped.',
+    auth:'在指导下制作出品，可上报原料异常。',authEn:'Prepares items under guidance and reports ingredient issues.', qual:'烘焙基础；协助饼房备料与出品。', qualEn:'Baking basics; assists pastry mise en place and production.'}],
+  '厨师助理':[{p:'厨务工',pe:'Kitchen Porter / Apprentice Cook',rep:'厨师助理 / 副厨',repEn:'Commis Chef / Sous Chef',
+    duty:'协助食材粗加工、切配与灶台辅助，保持砧板与操作台清洁。',
+    dutyEn:'Assists basic prep, cutting and stove support, and keeps boards and stations clean.',
+    auth:'在指导下参与烹饪辅助，无独立出品权。',authEn:'Assists cooking under guidance and holds no independent plating right.', qual:'经厨房作业培训；负责清洁、洗消与物料搬运。', qualEn:'Kitchen training; handles cleaning, dishwashing and stores handling.'}],
+
+  /* —— 其他部门：补齐真实存在的三级岗位 —— */
+  '楼层主管':[{p:'楼层服务员',pe:'Floor Attendant / Room Attendant',rep:'楼层主管 / 房务总监',repEn:'Floor Supervisor / Executive Housekeeper',
+    duty:'负责本楼层舱房清洁、布草更换与补给，按清单完成迎客与离船翻房。',
+    dutyEn:'Cleans assigned staterooms, changes linen and provisions, and turns rooms per checklist for embark/disembark.',
+    auth:'在指派楼层执行清洁与补给，可上报设施报修。',authEn:'Cleans and provisions on the assigned floor and reports maintenance needs.', qual:'房务培训；负责客舱清洁与补给。', qualEn:'Housekeeping training; cabin cleaning and replenishment.'}],
+  '布草员':[{p:'布草助理',pe:'Linen Assistant',rep:'布草员 / 楼层主管',repEn:'Linen Keeper / Floor Supervisor',
+    duty:'协助布草收发、分捡、折叠与污损登记，配合洗衣与盘点。',
+    dutyEn:'Assists linen receiving, sorting, folding and damage logging, and supports laundry and counts.',
+    auth:'在指导下管理布草流转，可上报布草缺失。',authEn:'Manages linen flow under guidance and reports shortages.', qual:'熟悉布草分拣与收发；体力好。', qualEn:'Skilled in linen sorting and issue; physically fit.'}],
+  '主持/邮轮大使':[{p:'邮轮大使助理',pe:'Cruise Staff Assistant',rep:'主持 / 邮轮大使 / 活动经理',repEn:'Cruise Staff / Host / Activity Manager',
+    duty:'协助活动布置、器材搬运与宾客引导，参与小型互动与游戏主持。',
+    dutyEn:'Assists event setup, equipment moves and guest guidance, and joins small hosting and games.',
+    auth:'在协助活动范围内维持秩序，可调度活动器材。',authEn:'Maintains order within assisted events and may deploy activity gear.', qual:'良好表达与服务意识；协助活动与主持。', qualEn:'Good presentation and service sense; assists activities and hosting.'}],
+  '观光向导':[{p:'向导助理',pe:'Guide Assistant',rep:'观光向导 / 岸上游览经理',repEn:'Shore Excursion Guide / Excursion Manager',
+    duty:'协助带团的点名、队伍引导与安全提示，配合司机与供应商衔接。',
+    dutyEn:'Assists headcounts, group guidance and safety briefings, and coordinates with drivers and suppliers.',
+    auth:'在授权内协助带团与秩序维护，可上报异常情况。',authEn:'Supports tours and order within authority and escalates anomalies.', qual:'熟悉目的地基础信息；协助向导带团与翻译。', qualEn:'Knows basic destination info; assists the guide with groups and translation.'}]
+};
+
+/* 四级岗位（按三级岗位中文名索引；每项含中英文名称、隶属、职责、权限，与一/二/三级岗位同表呈现，缩进最深） */
+const DEPT_SUBS4 = {
+  '餐厅领班':[{p:'餐厅服务员',pe:'Waiter / Server',rep:'餐厅领班 / 餐厅主管',repEn:'Head Waiter / Restaurant Manager',
+    duty:'负责指定区域宾客点单、上菜与席面服务，响应用餐需求并维持桌面整洁。',
+    dutyEn:'Takes orders, serves and maintains tables in an assigned section, responds to dining needs and keeps settings tidy.',
+    auth:'在指派区域执行对客服务，可上报客诉。',authEn:'Serves guests in the assigned section and escalates complaints.', qual:'经餐饮服务培训；负责点单、上菜与桌面服务。', qualEn:'Food-service training; handles order taking, serving and table service.'}],
+  '调酒师':[{p:'吧台助理',pe:'Bar Back',rep:'调酒师 / 酒吧经理',repEn:'Bartender / Bar Manager',
+    duty:'负责补货、洗杯、冰与水果备料，支援吧台出酒与清洁，保障高峰运转。',
+    dutyEn:'Restocks, washes glassware, preps ice and fruit, and supports the bar to keep peak service running.',
+    auth:'在吧台范围内协助运营，可上报缺货。',authEn:'Supports bar operations within the station and reports stock-outs.', qual:'经吧台作业培训；负责补充酒水、清洁与器具准备。', qualEn:'Bar-back training; restocks, cleans and prepares bar equipment.'}],
+  '礼宾员':[{p:'行李员',pe:'Bell Attendant',rep:'礼宾员 / 宾客关系经理',repEn:'Concierge / Guest Relations Manager',
+    duty:'负责行李搬运、送达舱房与寄存，协助迎送与礼宾引导。',
+    dutyEn:'Moves, delivers and stores luggage, and assists arrivals/departures and concierge guidance.',
+    auth:'在授权内搬运与寄存行李，可上报贵重物品异常。',authEn:'Handles and stores luggage within authority and reports valuables issues.', qual:'基本服务培训；负责行李搬运与宾客引导。', qualEn:'Basic service training; handles luggage and guest guidance.'}]
 };
 
 /* 二级岗位详表：职责 / 权限 / 隶属（中英文），按二级岗位中文名索引 */
@@ -1889,177 +2010,177 @@ const SUB_DETAIL = {
     duty:'在驾驶员指导下学习航行值班、海图作业与船舶操纵，参与靠离泊与甲板保养，完成培训记录簿。',
     dutyEn:'Learns watchkeeping, chartwork and ship handling under officers; takes part in berthing and deck maintenance; completes the training record book.',
     auth:'在监督下执行指定值班与作业任务，无独立指挥权。',
-    authEn:'Performs assigned watch and deck tasks under supervision; holds no independent command authority.' },
+    authEn:'Performs assigned watch and deck tasks under supervision; holds no independent command authority.' , qual:'航海院校在读或毕业，持有海员证与基本安全培训；实习阶段，跟随驾驶员学习航行与甲板作业。', qualEn:"Maritime-academy student or graduate with seaman's book and basic safety training; on-the-job training under officers in navigation and deck work."},
   '舵工':{ rep:'当班驾驶员', repEn:'Officer of the Watch',
     duty:'操舵并正确执行舵令，协助瞭望、系泊与引水梯值守，维护驾驶台与信号设备。',
     dutyEn:'Steers the ship and answers helm orders, assists lookout, mooring and pilot-ladder duties, and maintains bridge and signaling equipment.',
     auth:'按驾驶员指令操舵，可就舵效异常提出警示。',
-    authEn:'Steers per the officer orders and may warn of abnormal steering response.' },
+    authEn:'Steers per the officer orders and may warn of abnormal steering response.' , qual:'持基本安全培训；具备操舵、瞭望与甲板作业经验，通常由资深水手担任。', qualEn:'Basic safety training; steering, lookout and deck experience, usually served by senior ratings.'},
   '驾助（培训驾驶员）':{ rep:'大副 / 当班驾驶员', repEn:'Chief Officer / Officer of the Watch',
     duty:'协助航行值班与海图作业，学习避碰规则与航行计划，承担部分甲板行政管理。',
     dutyEn:'Assists watchkeeping and chartwork, studies collision regulations and voyage planning, and shares some deck administration.',
     auth:'在持证人监督下履行驾驶员职责，不得单独承担安全责任。',
-    authEn:'Performs officer duties under a licensed watch officer and may not hold sole safety responsibility.' },
+    authEn:'Performs officer duties under a licensed watch officer and may not hold sole safety responsibility.' , qual:'持有二副或三副适任证书或培训资格；在驾驶员指导下积累航行值班资历。', qualEn:'Holds a 2/O or 3/O Certificate of Competency or trainee eligibility; building watch-keeping experience under officers.'},
   '一级水手':{ rep:'水手长', repEn:'Boatswain',
     duty:'甲板值班、系泊与锚泊作业，救生消防设备操作与维护，以及舷外与高空作业。',
     dutyEn:'Deck watches, mooring and anchoring, life-saving and fire equipment operation and upkeep, and boat and height work.',
     auth:'在指派区域独立执行甲板作业，可叫停危险操作。',
-    authEn:'Performs deck work independently in assigned areas and may stop unsafe operations.' },
+    authEn:'Performs deck work independently in assigned areas and may stop unsafe operations.' , qual:'持基本安全培训与精通救生艇证书；具备航行值班、系泊与甲板维护资质。', qualEn:'Basic safety and proficiency-in-lifeboats certificates; qualified for watch, mooring and deck maintenance.'},
   '二级水手':{ rep:'水手长 / 一级水手', repEn:'Boatswain / Able Seaman',
     duty:'协助甲板清洁、油漆与保养、系泊准备与日常杂务。',
     dutyEn:'Assists deck cleaning, painting and upkeep, mooring preparation and routine tasks.',
     auth:'在指导下执行基础甲板作业。',
-    authEn:'Performs basic deck tasks under guidance.' },
+    authEn:'Performs basic deck tasks under guidance.' , qual:'完成基本安全培训；协助甲板作业，积累水手资历。', qualEn:'Completed basic safety training; assists deck work and builds rating experience.'},
   '轮机实习生':{ rep:'轮机长 / 大管轮', repEn:'Chief Engineer / Second Engineer',
     duty:'在轮机员指导下学习机舱值班、设备维护与故障排查，完成轮机培训记录。',
     dutyEn:'Learns engine-room watches, equipment maintenance and fault finding under engineers, and completes training records.',
     auth:'在监督下协助机舱作业，无独立操作关键设备权。',
-    authEn:'Assists engine-room work under supervision and has no independent operation of critical machinery.' },
+    authEn:'Assists engine-room work under supervision and has no independent operation of critical machinery.' , qual:'轮机工程在读或毕业，持基本安全培训；在轮机员指导下实习。', qualEn:'Marine-engineering student or graduate with basic safety training; on-the-job training under engineers.'},
   '三管轮':{ rep:'大管轮 / 轮机长', repEn:'Second Engineer / Chief Engineer',
     duty:'负责甲板机械、锚泊设备、舵机与部分辅机的值班与维护，并管理防污染设备。',
     dutyEn:'Watches and maintains deck machinery, anchoring gear, steering gear and some auxiliaries, and runs pollution-control equipment.',
     auth:'在分管设备范围内操作与隔离，可启动应急设备。',
-    authEn:'Operates and isolates equipment under charge and may start emergency gear.' },
+    authEn:'Operates and isolates equipment under charge and may start emergency gear.' , qual:'持有三管轮适任证书、STCW 培训；负责机舱设备值班与维修。', qualEn:'Holds a Third Engineer Certificate of Competency and STCW training; watch and maintenance of engine-room equipment.'},
   '四管轮':{ rep:'大管轮 / 轮机长', repEn:'Second Engineer / Chief Engineer',
     duty:'负责发电与配电、制冷空调、污水处理等辅机的值班维护，并记录运行参数。',
     dutyEn:'Watches and maintains generators and distribution, refrigeration and HVAC, sewage treatment and other auxiliaries, and logs parameters.',
     auth:'在分管设备范围内操作，可按规程切换供电。',
-    authEn:'Operates equipment under charge and may switch power supply per procedure.' },
+    authEn:'Operates equipment under charge and may switch power supply per procedure.' , qual:'持有四管轮适任证书、STCW 培训；协助机舱设备维护与污水处理。', qualEn:'Holds a Fourth Engineer Certificate of Competency and STCW training; assists machinery maintenance and sewage treatment.'},
   '电机实习生':{ rep:'电机员', repEn:'Electro-Technical Officer',
     duty:'协助电气设备的巡检、保养与故障排查，学习自动化与通信系统。',
     dutyEn:'Assists electrical inspection, upkeep and troubleshooting, and studies automation and communications.',
     auth:'在监督下协助电气作业，无独立隔离带电回路权。',
-    authEn:'Assists electrical work under supervision and may not isolate live circuits independently.' },
+    authEn:'Assists electrical work under supervision and may not isolate live circuits independently.' , qual:'电气或自动化专业在读或毕业，持基本安全培训；协助电机员工作。', qualEn:'Electrical or automation student or graduate with basic safety training; assists the Electro-Technical Officer.'},
   '宾客关系经理':{ rep:'酒店总监', repEn:'Hotel Director',
     duty:'处理宾客投诉与特殊需求，管理忠诚度与 VIP 接待，并协调跨部门服务补救。',
     dutyEn:'Handles guest complaints and special requests, manages loyalty and VIP hosting, and coordinates cross-department service recovery.',
     auth:'可批准小额补偿与客舱升级，代表酒店处理客诉。',
-    authEn:'Approves minor compensation and cabin upgrades and represents the hotel in complaint handling.' },
+    authEn:'Approves minor compensation and cabin upgrades and represents the hotel in complaint handling.' , qual:'酒店或旅游管理专业；3 年以上宾客关系或前台管理经验。', qualEn:'Hotel or tourism background; 3+ years guest-relations or front-office management.'},
   '前台经理':{ rep:'前厅 / 宾客服务经理', repEn:'Front Office / Guest Services Manager',
     duty:'管理接待、问询、登离船与账户结算的日常运作，并排班与培训前台团队。',
     dutyEn:'Runs reception, concierge, embarkation and disembarkation and account settlement, and schedules and trains front-desk staff.',
     auth:'可调整排班与处理账户差错，在授权范围内处理客诉。',
-    authEn:'Adjusts schedules and corrects account errors and handles complaints within delegated authority.' },
+    authEn:'Adjusts schedules and corrects account errors and handles complaints within delegated authority.' , qual:'酒店管理专业；3 年以上前台运营与团队管理经验。', qualEn:'Hospitality background; 3+ years front-desk operations and team management.'},
   '接待员':{ rep:'前台经理', repEn:'Front Office Manager',
     duty:'办理登船登记、舱房钥匙、问询、信息播报与账户查询。',
     dutyEn:'Processes check-in, cabin keys, inquiries, announcements and account queries.',
     auth:'在系统权限内办理入住与查询，可上报异常账户。',
-    authEn:'Performs check-in and queries within system rights and may escalate account anomalies.' },
+    authEn:'Performs check-in and queries within system rights and may escalate account anomalies.' , qual:'高中以上学历，经前台系统培训；良好的中英文沟通与服务礼仪。', qualEn:'High-school education plus reception-system training; good bilingual communication and service etiquette.'},
   '账户/收银':{ rep:'前台经理 / 事务长', repEn:'Front Office Manager / Purser',
     duty:'办理船上消费结算、外汇兑换、押金与退款，并核对账实。',
     dutyEn:'Handles onboard account settlement, foreign exchange, deposits and refunds, and reconciles the till.',
     auth:'在授权额度内办理收支，可冻结异常交易。',
-    authEn:'Processes receipts and payments within limit and may freeze suspicious transactions.' },
+    authEn:'Processes receipts and payments within limit and may freeze suspicious transactions.' , qual:'财务或相关专业；熟悉收银系统与外币结算，细致负责。', qualEn:'Finance background; skilled in POS and foreign-currency settlement, detail-oriented.'},
   '酒吧经理':{ rep:'餐饮经理', repEn:'F&B Manager',
     duty:'负责酒吧运营、酒水成本与库存、调酒团队管理与酒单设计。',
     dutyEn:'Runs bar operations, beverage cost and inventory, bar-staff management and drink-menu design.',
     auth:'可管控酒水采购与损耗，对酗酒宾客有拒供权。',
-    authEn:'Controls beverage purchasing and shrinkage and may refuse service to intoxicated guests.' },
+    authEn:'Controls beverage purchasing and shrinkage and may refuse service to intoxicated guests.' , qual:'调酒资质或酒吧管理经验 3 年以上；熟悉酒水成本与许可证合规。', qualEn:'Bartending qualification or 3+ years bar management; knowledgeable in beverage cost and licensing compliance.'},
   '餐厅主管':{ rep:'餐饮经理', repEn:'F&B Manager',
     duty:'负责餐厅日常服务、桌位与人员调度、宾客用餐体验与卫生监督。',
     dutyEn:'Runs daily restaurant service, seating and staffing, guest dining experience and hygiene oversight.',
     auth:'可调度服务员与调整桌位，在授权内处理用餐投诉。',
-    authEn:'Assigns servers and seating and handles dining complaints within authority.' },
+    authEn:'Assigns servers and seating and handles dining complaints within authority.' , qual:'餐饮运营经验 3 年以上；熟悉餐厅服务流程与团队带训。', qualEn:'3+ years restaurant operations; skilled in service flow and crew training.'},
   '侍酒师':{ rep:'餐饮经理 / 餐厅主管', repEn:'F&B Manager / Restaurant Manager',
     duty:'管理酒单、葡萄酒侍酒与荐酒、酒窖与库存，以及餐酒搭配。',
     dutyEn:'Manages the wine list, wine service and recommendation, cellar and stock, and food pairing.',
     auth:'在授权范围内开瓶与荐酒，可拒收不达标酒品。',
-    authEn:'Opens and recommends wines within authority and may reject substandard stock.' },
+    authEn:'Opens and recommends wines within authority and may reject substandard stock.' , qual:'持有侍酒师认证（如 CMS / WSET）；熟悉葡萄酒知识与酒单管理。', qualEn:'Sommelier certification such as CMS or WSET; expert in wine knowledge and list management.'},
   '副厨':{ rep:'行政总厨', repEn:'Executive Chef',
     duty:'协助厨房运营、排班与成本控制，在总厨缺席时代管厨房，并监督出品质与卫生。',
     dutyEn:'Assists galley operations, scheduling and cost control, acts for the chef in absence, and supervises quality and hygiene.',
     auth:'可调度厨房人员与暂代出单，对卫生违规有停线权。',
-    authEn:'Assigns galley staff and covers expediting and may stop the line over hygiene breaches.' },
+    authEn:'Assigns galley staff and covers expediting and may stop the line over hygiene breaches.' , qual:'烹饪专业；5 年以上厨房经验，熟悉各岗位出品与食品安全。', qualEn:'Culinary training; 5+ years kitchen experience, skilled in station production and food safety.'},
   '饼房厨师':{ rep:'行政总厨', repEn:'Executive Chef',
     duty:'负责面包、糕点与甜品制作、配方与出品标准，以及饼房卫生。',
     dutyEn:'Produces bread, pastry and desserts, recipes and plating standards, and pastry hygiene.',
     auth:'管理饼房区域与配方，可拒用不合格原料。',
-    authEn:'Runs the pastry section and recipes and may reject unfit ingredients.' },
+    authEn:'Runs the pastry section and recipes and may reject unfit ingredients.' , qual:'西点或烘焙专业资质；3 年以上饼房出品经验。', qualEn:'Pastry or baking qualification; 3+ years pastry production.'},
   '厨师助理':{ rep:'各岗位厨师长 / 行政总厨', repEn:'Section Chef / Executive Chef',
     duty:'协助备料、切配与烹饪，保持工位卫生与物料整理。',
     dutyEn:'Assists mise en place, prep and cooking, and keeps the station clean and stocked.',
     auth:'在指导下执行配菜与烹饪，无独立出品决策权。',
-    authEn:'Performs prep and cooking under guidance and has no independent plating decisions.' },
+    authEn:'Performs prep and cooking under guidance and has no independent plating decisions.' , qual:'烹饪基础培训；协助厨师备料与出品，有厨房经验者优先。', qualEn:'Basic culinary training; assists mise en place and production, kitchen experience preferred.'},
   '楼层主管':{ rep:'房务总监', repEn:'Executive Housekeeper',
     duty:'督导楼层清洁、查房与布草补充，安排客舱服务员班次与质量检查。',
     dutyEn:'Supervises floor cleaning, room checks and linen top-up, and schedules cabin stewards and quality checks.',
     auth:'可调整班次与复检不达标舱房，在授权内处理宾客清洁诉求。',
-    authEn:'Adjusts shifts and re-checks failing cabins and handles cleaning requests within authority.' },
+    authEn:'Adjusts shifts and re-checks failing cabins and handles cleaning requests within authority.' , qual:'房务经验 3 年以上；熟悉客舱清洁标准与楼层排班。', qualEn:'3+ years housekeeping; skilled in cabin standards and floor scheduling.'},
   '布草员':{ rep:'房务总监 / 楼层主管', repEn:'Executive Housekeeper / Floor Supervisor',
     duty:'管理布草与制服的收发、洗涤交接、盘点与损耗控制。',
     dutyEn:'Manages linen and uniform issue and return, laundry handover, counting and loss control.',
     auth:'在库存范围内发放与登记，可上报布草短缺。',
-    authEn:'Issues and logs within stock and reports linen shortages.' },
+    authEn:'Issues and logs within stock and reports linen shortages.' , qual:'熟悉布草收发、盘点与洗涤对接；体力好、细致。', qualEn:'Skilled in linen issue, count and laundry coordination; fit and meticulous.'},
   '公共区域保洁':{ rep:'房务总监 / 楼层主管', repEn:'Executive Housekeeper / Floor Supervisor',
     duty:'负责走廊、大堂、餐厅等公共区域的清洁与保养，以及垃圾收集。',
     dutyEn:'Cleans and maintains corridors, lobbies, restaurants and other public areas, and collects waste.',
     auth:'在指派区域执行清洁，可上报设施损坏。',
-    authEn:'Cleans assigned areas and reports facility damage.' },
+    authEn:'Cleans assigned areas and reports facility damage.' , qual:'经清洁作业培训；负责公共区域卫生，体力好。', qualEn:'Cleaning training; maintains public-area hygiene, physically fit.'},
   '活动经理':{ rep:'邮轮总监', repEn:'Cruise Director',
     duty:'策划与主持日间活动（健身、游戏、讲座等），管理活动团队与器材。',
     dutyEn:'Plans and hosts daytime activities such as fitness, games and lectures, and manages the activity team and equipment.',
     auth:'可调整活动安排与动用活动预算，对活动安全有现场权。',
-    authEn:'Adjusts programming and uses the activity budget and holds on-site authority over activity safety.' },
+    authEn:'Adjusts programming and uses the activity budget and holds on-site authority over activity safety.' , qual:'活动策划或演艺背景；3 年以上邮轮活动组织经验。', qualEn:'Event-planning or entertainment background; 3+ years cruise activity organization.'},
   '主持/邮轮大使':{ rep:'邮轮总监 / 活动经理', repEn:'Cruise Director / Activity Manager',
     duty:'主持活动与广播、引导宾客参与，并提供信息与娱乐互动。',
     dutyEn:'Hosts events and announcements, encourages guest participation, and provides information and entertainment.',
     auth:'在其主持活动范围内维持秩序，可调度活动器材。',
-    authEn:'Maintains order within hosted events and may deploy activity equipment.' },
+    authEn:'Maintains order within hosted events and may deploy activity equipment.' , qual:'良好的舞台表达与中英文主持能力；有演艺或活动经验。', qualEn:'Strong stage presence and bilingual hosting; entertainment or event experience.'},
   '赌场经理':{ rep:'邮轮总监 / 酒店总监', repEn:'Cruise Director / Hotel Director',
     duty:'负责赌场运营、合规（年龄核验与反洗钱）、账表与荷官团队管理。',
     dutyEn:'Runs casino operations, compliance such as age checks and anti-money-laundering, accounting and dealer-team management.',
     auth:'可叫停违规赌局并拒入违规宾客，在授权内处理账差。',
-    authEn:'May halt non-compliant games and deny entry to violators and handles till variances within authority.' },
+    authEn:'May halt non-compliant games and deny entry to violators and handles till variances within authority.' , qual:'持有赌场运营资质与合规培训；熟悉博彩法规与账物管理。', qualEn:'Casino-operation qualification and compliance training; knowledgeable in gaming regulation and cage control.'},
   '儿童俱乐部助理':{ rep:'青年辅导员', repEn:'Youth Counselor',
     duty:'协助儿童与青少年活动、看护与安全登记，以及家长沟通。',
     dutyEn:'Assists children and teen club activities, supervision and sign-in and sign-out, and parent communication.',
     auth:'在其管辖区域内管理儿童纪律，可上报安全事件。',
-    authEn:'Manages children discipline within the area and reports safety incidents.' },
+    authEn:'Manages children discipline within the area and reports safety incidents.' , qual:'持有儿童看护或急救证书；有儿童活动经验。', qualEn:'Childcare or first-aid certificate; childrens-activity experience.'},
   '监控员':{ rep:'保安主管', repEn:'Security Officer',
     duty:'值守闭路电视、监控关键区域、记录异常并即时上报。',
     dutyEn:'Monitors CCTV, watches key areas, logs anomalies and reports at once.',
     auth:'可调阅与标记监控画面，可触发安保响应。',
-    authEn:'Reviews and flags footage and may trigger security response.' },
+    authEn:'Reviews and flags footage and may trigger security response.' , qual:'完成安保监控培训；熟悉监控系统操作与报告流程。', qualEn:'Surveillance training; skilled in CCTV operation and reporting.'},
   '安检员':{ rep:'保安主管', repEn:'Security Officer',
     duty:'执行登离船安检、X 光与金属探测，以及禁带品处置。',
     dutyEn:'Performs boarding and landing screening, X-ray and metal detection, and contraband handling.',
     auth:'可扣留违禁品并拒止违规人员，必要时呼叫支援。',
-    authEn:'May seize prohibited items and deny entry to violators and calls backup when needed.' },
-  '医务助理':{ rep:'船医', repEn:'Ship Doctor',
+    authEn:'May seize prohibited items and deny entry to violators and calls backup when needed.' , qual:'完成安检设备操作与保安意识培训；负责登离船安检。', qualEn:'Screening-equipment operation and security-awareness training; performs embark and disembark screening.'},
+  '医务助理':{ rep:'船医', repEn:"Ship's Doctor",
     duty:'协助诊疗、护理、接种、病历与药房管理，以及卫生宣教。',
     dutyEn:'Assists diagnosis, nursing, vaccination, records and pharmacy, and health education.',
     auth:'在船医授权下执行护理与给药，可上报疫情苗头。',
-    authEn:'Performs care and medication under the doctor and reports outbreak signals.' },
+    authEn:'Performs care and medication under the doctor and reports outbreak signals.' , qual:'持有护理或医护助理资质；协助船医诊疗与药品管理。', qualEn:'Nursing or medical-assistant qualification; assists the doctor and pharmacy.'},
   '观光向导':{ rep:'岸上游览经理', repEn:'Shore Excursion Manager',
     duty:'带队上岸游览、解说与安全管理，清点人数与应急联络。',
     dutyEn:'Leads shore tours, commentary and safety, headcounts and emergency contact.',
     auth:'可调整游览节奏与就地处置安全事件，可叫停危险活动。',
-    authEn:'Adjusts tour pace and handles on-site safety and may stop hazardous activities.' },
+    authEn:'Adjusts tour pace and handles on-site safety and may stop hazardous activities.' , qual:'熟悉目的地与中英文讲解；持有导游资质者优先。', qualEn:'Knows destinations and bilingual commentary; tour-guide license preferred.'},
   '预订协调':{ rep:'岸上游览经理', repEn:'Shore Excursion Manager',
     duty:'负责岸游预订、收费、名额与供应商对接，以及行程变更通知。',
     dutyEn:'Handles shore-tour bookings, charges, capacity and supplier liaison, and change notices.',
     auth:'在系统中办理预订与改签，可上报供应商异常。',
-    authEn:'Books and changes tours in the system and reports supplier issues.' },
+    authEn:'Books and changes tours in the system and reports supplier issues.' , qual:'旅游或客服背景；熟悉预订系统与行程排期。', qualEn:'Tourism or customer-service background; skilled in reservation systems and scheduling.'},
   '船员管理员':{ rep:'船员事务长', repEn:'Crew Purser',
     duty:'办理船员入离船、证件、考勤、工资单与福利事务，以及档案维护。',
     dutyEn:'Handles crew sign-on and sign-off, documents, attendance, payroll and welfare, and records.',
     auth:'在授权内办理船员行政手续，可上报合同异常。',
-    authEn:'Processes crew administration within authority and reports contract anomalies.' },
+    authEn:'Processes crew administration within authority and reports contract anomalies.' , qual:'人事或行政背景；熟悉船员证件、考勤与 onboarding 流程。', qualEn:'HR or admin background; skilled in crew documents, attendance and onboarding.'},
   '会计':{ rep:'事务长', repEn:'Purser',
     duty:'核算船上收入与成本、编制报表、配合税务与审计，以及对账。',
     dutyEn:'Accounts ship revenue and cost, prepares statements, supports tax and audit, and reconciles.',
     auth:'在授权内记账与调整，可冻结异常账目。',
-    authEn:'Posts and adjusts within authority and may freeze anomalous accounts.' },
+    authEn:'Posts and adjusts within authority and may freeze anomalous accounts.' , qual:'会计专业资质；熟悉邮轮财务核算与国际会计准则。', qualEn:'Accounting qualification; skilled in ship finance and international standards.'},
   '出纳':{ rep:'事务长 / 会计', repEn:'Purser / Accountant',
     duty:'管理现金与外汇、收付款、金库保管与日结。',
     dutyEn:'Manages cash and foreign exchange, receipts and payments, safe custody and daily close.',
     auth:'在限额内收付，可拒收可疑币种并上报。',
-    authEn:'Receives and pays within limit and rejects suspicious notes and reports.' },
+    authEn:'Receives and pays within limit and rejects suspicious notes and reports.' , qual:'财务背景；负责现金、银行与收银对账。', qualEn:'Finance background; handles cash, bank and POS reconciliation.'},
   '环保监督员':{ rep:'环保官', repEn:'Environmental Officer',
     duty:'巡检垃圾、污水、油类与大气排放操作，记录数据，并协助外部检查。',
     dutyEn:'Inspects garbage, sewage, oil and air-emission operations, logs data, and aids external checks.',
     auth:'可叫停违规排放操作，可上报环保隐患。',
-    authEn:'May stop non-compliant discharge operations and reports environmental hazards.' }
+    authEn:'May stop non-compliant discharge operations and reports environmental hazards.' , qual:'完成 MARPOL 与垃圾、污水处理培训；负责环保巡检与记录。', qualEn:'MARPOL and waste-treatment training; performs environmental rounds and logging.'}
 };
 
 /* ================= RENDER ================= */
@@ -2483,6 +2604,7 @@ function renderDepts(){
       let out=`<tr>
         <td class="dRole">${bi(r.role,r.roleEn)}</td>
         <td class="dRep">${bi(r.rep,r.repEn)}</td>
+        <td class="dQual">${r.qual?bi(r.qual,r.qualEn):'—'}</td>
         <td class="dDuty">${bi(r.duty,r.dutyEn)}</td>
         <td class="dAuth">${bi(r.auth,r.authEn)}</td>
       </tr>`;
@@ -2490,12 +2612,37 @@ function renderDepts(){
       if(subs&&subs.length){
         out+=subs.map(x=>{
           const d=SUB_DETAIL[x.p]||{};
-          return `<tr class="subRow">
+          let s=`<tr class="subRow">
             <td class="dRole">${bi(x.p,x.pe)}</td>
             <td class="dRep">${bi(d.rep||r.role,d.repEn||'')}</td>
+            <td class="dQual">${d.qual?bi(d.qual,d.qualEn):'—'}</td>
             <td class="dDuty">${d.duty?bi(d.duty,d.dutyEn):'—'}</td>
             <td class="dAuth">${d.auth?bi(d.auth,d.authEn):'—'}</td>
           </tr>`;
+          const subs3=DEPT_SUBS3[x.p];
+          if(subs3&&subs3.length){
+            s+=subs3.map(y=>{
+              let t=`<tr class="subRow3">
+              <td class="dRole">${bi(y.p,y.pe)}</td>
+              <td class="dRep">${bi(y.rep,y.repEn)}</td>
+              <td class="dQual">${y.qual?bi(y.qual,y.qualEn):'—'}</td>
+              <td class="dDuty">${y.duty?bi(y.duty,y.dutyEn):'—'}</td>
+              <td class="dAuth">${y.auth?bi(y.auth,y.authEn):'—'}</td>
+            </tr>`;
+              const subs4=DEPT_SUBS4[y.p];
+              if(subs4&&subs4.length){
+                t+=subs4.map(z=>`<tr class="subRow4">
+                  <td class="dRole">${bi(z.p,z.pe)}</td>
+                  <td class="dRep">${bi(z.rep,z.repEn)}</td>
+                  <td class="dQual">${z.qual?bi(z.qual,z.qualEn):'—'}</td>
+                  <td class="dDuty">${z.duty?bi(z.duty,z.dutyEn):'—'}</td>
+                  <td class="dAuth">${z.auth?bi(z.auth,z.authEn):'—'}</td>
+                </tr>`).join('');
+              }
+              return t;
+            }).join('');
+          }
+          return s;
         }).join('');
       }
       return out;
@@ -2506,6 +2653,7 @@ function renderDepts(){
       <div class="tablewrap"><table class="deptTbl"><thead><tr>
         <th>${bi('岗位','Position')}</th>
         <th>${bi('隶属','Reports to')}</th>
+        <th>${bi('任职条件','Qualifications')}</th>
         <th>${bi('职责','Duties')}</th>
         <th>${bi('权限','Authority')}</th>
       </tr></thead><tbody>${rows}</tbody></table></div>
@@ -2915,6 +3063,15 @@ loadFleetLive().then(live=>{
   }
 }).catch(()=>{});
 </script>
+<footer class="site-footer" style="text-align:center;padding:20px 14px;margin-top:30px;border-top:1px solid rgba(0,0,0,.08);color:#6b7280;font-size:13px;line-height:1.7">
+  <div class="counter">
+    <span id="busuanzi_container_site_pv">🌐 访问量 <span id="busuanzi_value_site_pv">—</span> 次</span>
+    <span style="margin:0 10px;opacity:.45">·</span>
+    <span id="busuanzi_container_site_uv">访客 <span id="busuanzi_value_site_uv">—</span> 人</span>
+  </div>
+  <div style="margin-top:7px;font-size:12px;opacity:.72">国际邮轮行业资料库 · 数据以网页主版为准，手机 APP 自动联动更新 · Cruise Industry Database</div>
+</footer>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <div id="updateToast" class="update-toast">
   <span id="updateToastMsg"></span>
   <button type="button" onclick="applyUpdate()">刷新</button>
