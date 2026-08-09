@@ -305,6 +305,10 @@
   .linkCard:hover{border-color:var(--teal)}
   .linkCard b{color:var(--navy);font-size:14px}
   .linkCard span{font-size:12.5px;color:var(--muted)}
+.ic-img{width:100%;height:168px;object-fit:cover;border-radius:8px;margin-bottom:8px;background:#eef3f6;display:block}
+.ic-video{display:inline-flex;align-items:center;gap:4px;margin-top:8px;color:#fff;background:var(--navy);padding:4px 12px;border-radius:999px;font-size:12px;text-decoration:none}
+.ic-video:hover{background:var(--teal)}
+.lc-img{width:30px;height:30px;border-radius:7px;object-fit:contain;margin-bottom:6px;background:#f3f7fa}
   .wm{position:fixed;inset:0;z-index:150;pointer-events:none;display:none;overflow:hidden}
   .wm span{position:absolute;transform:rotate(-24deg);color:rgba(11,37,69,.09);font-size:15px;font-weight:700;white-space:nowrap}
   body.nocopy{-webkit-user-select:none;user-select:none}
@@ -2927,31 +2931,36 @@ renderTrends();
 
 /* ================= 5 个新增板块（#137 骨架，数据占位待 #138 充实） ================= */
 const NEWS=[
-  {date:'2026-08', cat:'要闻', catEn:'Headlines', title:'【示例】国际邮轮协会（CLIA）发布 2026 年行业展望', titleEn:'[Sample] CLIA publishes 2026 industry outlook', summary:'（示例占位）此处将整理 CLIA 年度行业报告要点：客量、新船交付、能源转型与区域市场。', summaryEn:'(Sample) Key takeaways from CLIA annual report: pax, newbuilds, energy transition, regional markets.', src:'CLIA', srcEn:'CLIA', url:''},
-  {date:'2026-07', cat:'新闻', catEn:'News', title:'【示例】某品牌宣布新船首航计划', titleEn:'[Sample] Brand announces newbuild maiden voyage', summary:'（示例占位）整理新船命名、母港、航线与特色设施。', summaryEn:'(Sample) Name, homeport, itinerary and signature facilities.', src:'示例', srcEn:'Sample', url:''},
-  {date:'2026-06', cat:'大事件', catEn:'Events', title:'【示例】区域性邮轮政策出台', titleEn:'[Sample] Regional cruise policy released', summary:'（示例占位）政策要点与行业影响解读。', summaryEn:'(Sample) Policy highlights and industry impact.', src:'示例', srcEn:'Sample', url:''}
+  {date:'2026-04', cat:'要闻', catEn:'Headlines', title:'CLIA 发布《2026 年邮轮业态势》：2025 年全球客流量 3720 万创历史新高', titleEn:'CLIA 2026 State of the Cruise Industry: 37.2M passengers in 2025, a record', summary:'国际邮轮协会（CLIA）2026 年 4 月报告显示，2025 年全球邮轮客流量达 3720 万人次、创历史新高，近 90% 旅客表示愿再次乘坐。2026 年 CLIA 成员远洋邮轮将达 325 艘、约 69 万床位；行业承诺 2050 年净零排放。2026 年预计全球客流 3830 万人次。', summaryEn:'CLIA released its April 2026 report: 37.2M global passengers in 2025 (record high), with nearly 90% intending to cruise again. In 2026, 325 CLIA-member ocean ships serve ~690k lower berths; the industry commits to net-zero by 2050. 2026 forecast: 38.3M passengers.', src:'CLIA / PRNewswire', srcEn:'CLIA / PRNewswire', url:'https://www.prnewswire.com/news-releases/cruise-industry-sees-strong-demand-as-global-impact-expands-and-investments-in-efficiency-and-future-fuels-continue-302743243.html', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Icon_of_the_Seas_Puerto_Rico_2025_%28cropped%29.jpg/640px-Icon_of_the_Seas_Puerto_Rico_2025_%28cropped%29.jpg', video:''},
+  {date:'2025-11', cat:'新闻', catEn:'News', title:'中国邮轮市场强劲复苏：2025 年前 9 月接待国际邮轮旅客 204.7 万人次，同比 +28%', titleEn:'China cruise market rebounds: 2.047M intl passengers Jan-Sep 2025, +28% YoY', summary:'据中国交通运输协会邮轮游艇分会（CCYIA）统计，2025 年 1–9 月全国接待国际邮轮旅客 204.7 万人次（同比 +28%），母港旅客 198.5 万人次（+33%）；首艘国产大型邮轮“爱达·魔都号”自 2024 年首航至 2025 年 9 月接待超 110 万人次。第十八届中国邮轮产业发展大会（CCS18）于 2025 年 11 月在广州南沙召开。', summaryEn:'Per CCYIA, Jan-Sep 2025 China welcomed 2.047M intl cruise passengers (+28% YoY), homeport 1.985M (+33%). Adora Magic City carried 1.1M+ since its Jan 2024 debut. The 18th China Cruise Industry Conference (CCS18) was held in Guangzhou Nansha, Nov 2025.', src:'CCYIA / 中国邮轮网', srcEn:'CCYIA', url:'https://www.cctaw.cn/xiehui/xiehui/2025-11-10/14343.html', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/ADORA_MAGIC_CITY_at_kochi_port.jpg/640px-ADORA_MAGIC_CITY_at_kochi_port.jpg', video:''},
+  {date:'2026-07', cat:'大事件', catEn:'Events', title:'新船密集交付：皇家加勒比 Legend of the Seas、迪士尼 Adventure 等旗舰相继登场', titleEn:'Newbuild wave: Royal Caribbean Legend of the Seas, Disney Adventure and more debut', summary:'2025–2026 迎来新船交付高峰：皇家加勒比 Star of the Seas（2025.8，24.9 万吨 / 7600 客）、Legend of the Seas（2026.7，第三艘 Icon 级）；迪士尼 Adventure（2026，新加坡，品牌首艘亚洲母港船，约 6000 客）；MSC World Asia（2026.12）；挪威邮轮 Norwegian Luna（2026）等。', summaryEn:'A newbuild surge in 2025-2026: Royal Caribbean Star of the Seas (Aug 2025, 248,663 GT / 7,600 pax) and Legend of the Seas (Jul 2026, 3rd Icon-class); Disney Adventure (2026, Singapore, DCL first Asia-homeport ship, ~6,000 pax); MSC World Asia (Dec 2026); Norwegian Luna (2026).', src:'Cruise Critic / 360Cruising', srcEn:'Cruise Critic', url:'https://www.cruisecritic.com/articles/new-cruise-ships-2025-ranked-largest-to-smallest', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/C%C3%A1diz_-_Crucero_Star_of_the_Seas%2C_atracado_en_el_puerto_de_C%C3%A1diz_%2825_julio_2025%29_01.jpg/640px-C%C3%A1diz_-_Crucero_Star_of_the_Seas%2C_atracado_en_el_puerto_de_C%C3%A1diz_%2825_julio_2025%29_01.jpg', video:'https://youtu.be/8dUOxmjZow8'}
 ];
 const VOYAGES=[
-  {line:'【示例】地中海环线 7 晚', lineEn:'[Sample] Mediterranean 7-night', ship:'示例邮轮', shipEn:'Sample Ship', region:'地中海', regionEn:'Mediterranean', dep:'上海', depEn:'Shanghai', duration:'7 晚', durationEn:'7 nights', priceFrom:'¥6,999 起', priceFromEn:'from ¥6,999', bookUrl:''},
-  {line:'【示例】加勒比往返 5 晚', lineEn:'[Sample] Caribbean 5-night', ship:'示例邮轮', shipEn:'Sample Ship', region:'加勒比', regionEn:'Caribbean', dep:'迈阿密', depEn:'Miami', duration:'5 晚', durationEn:'5 nights', priceFrom:'$599 起', priceFromEn:'from $599', bookUrl:''}
+  {line:'皇家加勒比「海洋标志号」东/西加勒比 7 晚', lineEn:'Royal Caribbean Icon of the Seas - Eastern/Western Caribbean 7-night', ship:'海洋标志号 Icon of the Seas', shipEn:'Icon of the Seas', region:'加勒比', regionEn:'Caribbean', dep:'迈阿密', depEn:'Miami', duration:'7 晚', durationEn:'7 nights', priceFrom:'约 ¥8,000 起（参考）', priceFromEn:'from ~¥8,000 (ref)', bookUrl:'https://www.royalcaribbean.com/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Icon_of_the_Seas_Puerto_Rico_2025_%28cropped%29.jpg/640px-Icon_of_the_Seas_Puerto_Rico_2025_%28cropped%29.jpg', video:'https://youtu.be/8dUOxmjZow8'},
+  {line:'MSC「世界欧罗巴号」西地中海 7 晚', lineEn:'MSC World Europa - Western Mediterranean 7-night', ship:'世界欧罗巴号 MSC World Europa', shipEn:'MSC World Europa', region:'地中海', regionEn:'Mediterranean', dep:'巴塞罗那 / 热那亚', depEn:'Barcelona / Genoa', duration:'7 晚', durationEn:'7 nights', priceFrom:'约 €900 起（参考）', priceFromEn:'from ~€900 (ref)', bookUrl:'https://www.msccruises.com/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg/640px-MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg', video:''},
+  {line:'迪士尼 Adventure 新加坡 3–4 晚（无停靠港“目的地船”）', lineEn:'Disney Adventure Singapore 3-4 nights (destination ship, no ports)', ship:'迪士尼冒险号 Disney Adventure', shipEn:'Disney Adventure', region:'东南亚', regionEn:'Southeast Asia', dep:'新加坡', depEn:'Singapore', duration:'3–4 晚', durationEn:'3-4 nights', priceFrom:'约 S$1,200 起（参考）', priceFromEn:'from ~S$1,200 (ref)', bookUrl:'https://www.disneycruise.com/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Disney_Adventure_Disney_Cruise_Line_%2855114134961%29.jpg/640px-Disney_Adventure_Disney_Cruise_Line_%2855114134961%29.jpg', video:''},
+  {line:'爱达·魔都号 上海母港 4–5 晚（日本/韩国）', lineEn:'Adora Magic City - Shanghai homeport 4-5 nights (Japan/Korea)', ship:'爱达·魔都号 Adora Magic City', shipEn:'Adora Magic City', region:'东亚', regionEn:'East Asia', dep:'上海', depEn:'Shanghai', duration:'4–5 晚', durationEn:'4-5 nights', priceFrom:'约 ¥3,000 起（参考）', priceFromEn:'from ~¥3,000 (ref)', bookUrl:'https://www.adoracruises.com/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/ADORA_MAGIC_CITY_at_kochi_port.jpg/640px-ADORA_MAGIC_CITY_at_kochi_port.jpg', video:''}
 ];
 const TRAVEL=[
-  {cat:'常识', catEn:'Essentials', title:'【示例】第一次坐邮轮需要护照吗？', titleEn:'[Sample] Do I need a passport for my first cruise?', body:'（示例占位）邮轮常识科普：证件、签证、币种、插座等。', bodyEn:'(Sample) Cruise essentials: documents, visa, currency, plugs.', url:''},
-  {cat:'准备', catEn:'Preparation', title:'【示例】行前打包清单', titleEn:'[Sample] Pre-trip packing list', body:'（示例占位）行李、药品、正装、岸游预订建议。', bodyEn:'(Sample) Luggage, medicine, formal wear, shorex tips.', url:''},
-  {cat:'贴士', catEn:'Tips', title:'【示例】如何避免晕船', titleEn:'[Sample] How to avoid seasickness', body:'（示例占位）选舱、药物、饮食等实用贴士。', bodyEn:'(Sample) Cabin choice, meds, diet tips.', url:''},
-  {cat:'分享', catEn:'Stories', title:'【示例】我的第一次登船体验', titleEn:'[Sample] My first embarkation', body:'（示例占位）游客真实分享。', bodyEn:'(Sample) Real traveller story.', url:''}
+  {cat:'常识', catEn:'Essentials', title:'第一次坐邮轮，证件怎么准备？', titleEn:'Documents for your first cruise', body:'国际航线需持有效护照（多数目的地要求有效期覆盖航程结束后 6 个月）及相应签证；部分国内母港日韩航线以团队名单过境，仍需护照。建议行前复印/拍照备份、购买境外旅行险；登船牌、护照、信用卡随身带。', bodyEn:'International sailings need a valid passport (usually 6 months beyond the trip) and any visas; some homeport Japan/Korea cruises use group lists but still require your passport. Carry boarding pass, passport and a credit card; make copies and consider travel insurance.', url:'https://cruising.org/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Port_of_Miami_Florida.jpg/640px-Port_of_Miami_Florida.jpg'},
+  {cat:'准备', catEn:'Preparation', title:'邮轮行前打包清单', titleEn:'Pre-cruise packing list', body:'正装/半正装 1–2 套（主餐厅晚宴、船长欢迎酒会）；防晒、泳衣、拖鞋；常用药与晕船药；转换插头（舱房多为欧/美标）；岸游预订确认单。托运行李封箱并挂好行李牌。', bodyEn:'Pack 1-2 smart-casual outfits for dinner / the captain reception; sunscreen, swimwear, slippers; meds and seasickness pills; a travel adapter; shore-excursion vouchers. Tag checked luggage with the supplied luggage tags.', url:'', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/C%C3%A1diz_-_Crucero_Star_of_the_Seas%2C_atracado_en_el_puerto_de_C%C3%A1diz_%2825_julio_2025%29_01.jpg/640px-C%C3%A1diz_-_Crucero_Star_of_the_Seas%2C_atracado_en_el_puerto_de_C%C3%A1diz_%2825_julio_2025%29_01.jpg'},
+  {cat:'贴士', catEn:'Tips', title:'如何减轻/避免晕船', titleEn:'How to avoid seasickness', body:'选低层中部舱房（晃动最小）；大风浪航段避免甲板长时间逗留；出海前保证睡眠、少吃油腻；可备晕船贴/药（遵医嘱）。多数现代大船配减摇鳍，体感平稳。', bodyEn:'Choose a lower, midship cabin (least motion); avoid long deck time in rough seas; rest well and eat light beforehand; seasickness patches or meds help (consult a doctor). Most modern megaships have stabilizers.', url:'', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg/640px-MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg'},
+  {cat:'分享', catEn:'Stories', title:'第一次登船：从码头到舱房', titleEn:'First embarkation: port to cabin', body:'抵达码头→安检→值船柜台核验护照→领取房卡（兼登船证与消费卡）→登船。行李由船员送到舱房（通常登船后 1–2 小时）。上船先熟悉甲板图、预约付费餐厅与演出，开启度假模式。', bodyEn:'At the terminal: security, check-in (passport), receive your key card (also boarding pass and onboard account), then board. Luggage is delivered to your cabin within 1-2 hrs. Explore the deck plan, book specialty dining and shows, and relax.', url:'', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/ADORA_MAGIC_CITY_at_kochi_port.jpg/640px-ADORA_MAGIC_CITY_at_kochi_port.jpg'}
 ];
 const SERVICES=[
-  {cat:'餐饮', catEn:'Dining', name:'【示例】主餐厅', nameEn:'[Sample] Main Dining Room', desc:'（示例占位）免费主餐、特色餐厅、自助与付费美食。', descEn:'(Sample) Complimentary & specialty dining.', url:''},
-  {cat:'娱乐', catEn:'Entertainment', name:'【示例】剧院与夜店', nameEn:'[Sample] Theatre & Nightclubs', desc:'（示例占位）百老汇级演出、赌场、酒吧。', descEn:'(Sample) Broadway shows, casino, bars.', url:''},
-  {cat:'休闲', catEn:'Leisure', name:'【示例】泳池与水疗', nameEn:'[Sample] Pools & Spa', desc:'（示例占位）泳池甲板、水疗、运动。', descEn:'(Sample) Pool deck, spa, sports.', url:''},
-  {cat:'健康', catEn:'Wellness', name:'【示例】健身与医疗', nameEn:'[Sample] Fitness & Medical', desc:'（示例占位）健身房、跑道、船医。', descEn:'(Sample) Gym, track, ship doctor.', url:''}
+  {cat:'餐饮', catEn:'Dining', name:'餐饮：免费主餐 + 特色餐厅', nameEn:'Dining: complimentary & specialty', desc:'多数邮轮含免费主餐厅（分席次正餐）、自助餐厅与快餐；特色餐厅（牛排、日料、意餐等）通常收费。新船餐饮选择极丰富，如 Icon 级有 20+ 种用餐场景。', descEn:'Most lines include a complimentary main dining room, buffet and casual eateries; specialty restaurants (steak, sushi, Italian) usually cost extra. Newbuilds offer 20+ venues, e.g. Icon-class.', url:'https://www.royalcaribbean.com/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Icon_of_the_Seas_Puerto_Rico_2025_%28cropped%29.jpg/640px-Icon_of_the_Seas_Puerto_Rico_2025_%28cropped%29.jpg'},
+  {cat:'娱乐', catEn:'Entertainment', name:'娱乐：百老汇级演出 + 水上乐园', nameEn:'Entertainment: Broadway shows & water parks', desc:'大型船配剧院（音乐剧/杂技/冰秀）、赌场、酒吧与夜店；甲板上有水上乐园、滑梯与泳池。Icon 级设 6 个水滑梯的 Category 6 水上乐园与悬浮无边泳池 Hideaway。', descEn:'Megaships feature theatres (musicals, aqua/ice shows), casinos, bars and nightclubs; top-deck water parks, slides and pools. Icon-class has Category 6 waterpark (6 slides) and the suspended Hideaway infinity pool.', url:'https://www.royalcaribbean.com/', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/C%C3%A1diz_-_Crucero_Star_of_the_Seas%2C_atracado_en_el_puerto_de_C%C3%A1diz_%2825_julio_2025%29_01.jpg/640px-C%C3%A1diz_-_Crucero_Star_of_the_Seas%2C_atracado_en_el_puerto_de_C%C3%A1diz_%2825_julio_2025%29_01.jpg'},
+  {cat:'休闲', catEn:'Leisure', name:'休闲：泳池甲板 + 水疗', nameEn:'Leisure: pool deck & spa', desc:'泳池甲板、日光浴、水疗按摩（SPA）、健身房与跑道是标配；部分船有迷你高尔夫、攀岩、冲浪模拟器。私密日光浴场（adults-only）需预约或套房权益。', descEn:'Pool decks, sunbathing, spa, gym and jogging track are standard; some ships add mini-golf, rock climbing, surf simulators. Private sun decks (adults-only) may need booking or suite perks.', url:'', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg/640px-MSC_World_Europa_-_Saint-Nazaire_-_June_2022.jpg'},
+  {cat:'健康', catEn:'Wellness', name:'健康：健身中心 + 船医', nameEn:'Wellness: fitness & ship doctor', desc:'船上设有健身中心（器材+课程）、慢跑跑道；24 小时船医诊所处理常见不适（费用计入房卡）。建议自带常用药，严重情况船医可紧急处置并安排岸上医疗。', descEn:'Ships have a fitness center and jogging track; a 24h ship doctor handles common issues (charged to your key card). Bring your own meds; the doctor can treat and arrange shore-side care if needed.', url:'', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Disney_Adventure_Disney_Cruise_Line_%2855114134961%29.jpg/640px-Disney_Adventure_Disney_Cruise_Line_%2855114134961%29.jpg'}
 ];
 const LINKS=[
-  {name:'国际邮轮协会 CLIA', nameEn:'Cruise Lines International Association', cat:'协会', catEn:'Association', url:'https://cruising.org', note:'全球邮轮业权威行业组织', noteEn:'Global cruise industry body'},
-  {name:'中国交通运输协会邮轮游艇分会', nameEn:'CCYIA', cat:'协会', catEn:'Association', url:'', note:'中国邮轮行业组织（示例）', noteEn:'China cruise industry org (sample)'},
-  {name:'上海海事大学', nameEn:'Shanghai Maritime University', cat:'教育机构', catEn:'Education', url:'', note:'邮轮 / 海事人才培养（示例）', noteEn:'Cruise/maritime talent (sample)'}
+  {name:'国际邮轮协会 CLIA', nameEn:'Cruise Lines International Association', cat:'协会', catEn:'Association', url:'https://cruising.org', note:'全球邮轮业权威行业组织，发布年度《邮轮业态势》报告', noteEn:'Global cruise industry body; publishes the annual State of the Cruise Industry', img:'https://www.google.com/s2/favicons?domain=cruising.org&sz=64'},
+  {name:'中国交通运输协会邮轮游艇分会（CCYIA）', nameEn:'CCYIA', cat:'协会', catEn:'Association', url:'https://www.ccyia.com', note:'中国邮轮/游艇国家级行业组织，主办中国邮轮产业发展大会（CCS）', noteEn:'China national cruise/yacht industry association; hosts the China Cruise Industry Conference', img:'https://www.google.com/s2/favicons?domain=ccyia.com&sz=64'},
+  {name:'上海海事大学', nameEn:'Shanghai Maritime University', cat:'教育机构', catEn:'Education', url:'https://www.shmtu.edu.cn', note:'以航运、物流、海洋为特色的高校，邮轮/海事人才培养基地', noteEn:'Maritime-focused university; cruise/maritime talent base', img:'https://www.google.com/s2/favicons?domain=shmtu.edu.cn&sz=64'},
+  {name:'国际海事组织 IMO', nameEn:'International Maritime Organization', cat:'国际组织', catEn:'Intl Organization', url:'https://www.imo.org', note:'联合国下属海事安全与防污染专门机构，制定全球航运规则', noteEn:'UN agency for maritime safety & pollution prevention; sets global shipping rules', img:'https://www.google.com/s2/favicons?domain=imo.org&sz=64'}
 ];
+function mediaImg(o){ if(!o||!o.img) return ''; return '<img class="ic-img" src="'+o.img+'" alt="" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display=\'none\'">'; }
+function mediaVideo(o){ if(!o||!o.video) return ''; return '<a class="ic-video" href="'+o.video+'" target="_blank" rel="noopener">▶ 视频</a>'; }
 function renderNews(){
   var box=document.getElementById('newsList'); if(!box) return;
   var isZh=lang==='zh';
@@ -2963,9 +2972,10 @@ function renderNews(){
     h+='<h3 class="subT">'+ (isZh?c[0]:c[1]) +'</h3><div class="cardGrid">';
     items.forEach(function(n){
       var link=n.url?(' <a href="'+n.url+'" target="_blank" rel="noopener">↗</a>'):'';
-      h+='<div class="infoCard"><div class="ic-date">'+n.date+' · '+(isZh?n.src:n.srcEn)+'</div>'+
+      h+='<div class="infoCard">'+mediaImg(n)+
+         '<div class="ic-date">'+n.date+' · '+(isZh?n.src:n.srcEn)+'</div>'+
          '<div class="ic-title">'+ (isZh?n.title:n.titleEn) + link +'</div>'+
-         '<div class="ic-body">'+(isZh?n.summary:n.summaryEn)+'</div></div>';
+         '<div class="ic-body">'+(isZh?n.summary:n.summaryEn)+'</div>'+mediaVideo(n)+'</div>';
     });
     h+='</div>';
   });
@@ -2977,9 +2987,10 @@ function renderVoyages(){
   var h='<div class="cardGrid">';
   VOYAGES.forEach(function(v){
     var book=v.bookUrl?(' <a class="ic-book" href="'+v.bookUrl+'" target="_blank" rel="noopener">预订 ↗</a>'):'';
-    h+='<div class="infoCard"><div class="ic-title">'+ (isZh?v.line:v.lineEn) +'</div>'+
+    h+='<div class="infoCard">'+mediaImg(v)+
+       '<div class="ic-title">'+ (isZh?v.line:v.lineEn) +'</div>'+
        '<div class="ic-meta">'+(isZh?v.ship:v.shipEn)+' · '+(isZh?v.region:v.regionEn)+' · '+(isZh?v.dep:v.depEn)+' · '+(isZh?v.duration:v.durationEn)+'</div>'+
-       '<div class="ic-body">'+(isZh?'票价 ':'Fare ')+(isZh?v.priceFrom:v.priceFromEn)+book+'</div></div>';
+       '<div class="ic-body">'+(isZh?'票价 ':'Fare ')+(isZh?v.priceFrom:v.priceFromEn)+book+'</div>'+mediaVideo(v)+'</div>';
   });
   h+='</div>';
   box.innerHTML=h;
@@ -2995,8 +3006,9 @@ function renderTravel(){
     h+='<h3 class="subT">'+ (isZh?c[0]:c[1]) +'</h3><div class="cardGrid">';
     items.forEach(function(t){
       var link=t.url?(' <a href="'+t.url+'" target="_blank" rel="noopener">↗</a>'):'';
-      h+='<div class="infoCard"><div class="ic-title">'+ (isZh?t.title:t.titleEn) + link +'</div>'+
-         '<div class="ic-body">'+(isZh?t.body:t.bodyEn)+'</div></div>';
+      h+='<div class="infoCard">'+mediaImg(t)+
+         '<div class="ic-title">'+ (isZh?t.title:t.titleEn) + link +'</div>'+
+         '<div class="ic-body">'+(isZh?t.body:t.bodyEn)+'</div>'+mediaVideo(t)+'</div>';
     });
     h+='</div>';
   });
@@ -3013,8 +3025,9 @@ function renderServices(){
     h+='<h3 class="subT">'+ (isZh?c[0]:c[1]) +'</h3><div class="cardGrid">';
     items.forEach(function(s){
       var link=s.url?(' <a href="'+s.url+'" target="_blank" rel="noopener">↗</a>'):'';
-      h+='<div class="infoCard"><div class="ic-title">'+ (isZh?s.name:s.nameEn) + link +'</div>'+
-         '<div class="ic-body">'+(isZh?s.desc:s.descEn)+'</div></div>';
+      h+='<div class="infoCard">'+mediaImg(s)+
+         '<div class="ic-title">'+ (isZh?s.name:s.nameEn) + link +'</div>'+
+         '<div class="ic-body">'+(isZh?s.desc:s.descEn)+'</div>'+mediaVideo(s)+'</div>';
     });
     h+='</div>';
   });
@@ -3030,7 +3043,7 @@ function renderLinks(){
     if(!items.length) return;
     h+='<h3 class="subT">'+ (isZh?c[0]:c[1]) +'</h3><div class="linksGrid">';
     items.forEach(function(l){
-      var inner='<b>'+(isZh?l.name:l.nameEn)+'</b><span>'+(isZh?l.note:l.noteEn)+'</span>';
+      var inner=(l.img?'<img class="lc-img" src="'+l.img+'" onerror="this.style.display=\'none\'">':'')+'<b>'+(isZh?l.name:l.nameEn)+'</b><span>'+(isZh?l.note:l.noteEn)+'</span>';
       h+= l.url ? ('<a class="linkCard" href="'+l.url+'" target="_blank" rel="noopener">'+inner+'</a>')
                 : ('<div class="linkCard">'+inner+'</div>');
     });
